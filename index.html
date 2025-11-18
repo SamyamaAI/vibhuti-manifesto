@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibhūti Protocol | Consciousness Computing Manifesto</title>
+    <style>
+        :root {
+            --saffron: #FF9933; --deep-saffron: #CC7722; --gold: #FFD700;
+            --deep-blue: #000080; --navy: #001F3F; --white: #FFFFFF;
+            --cream: #FFF8DC; --light-gold: #FFF4CC;
+            --trinity-ratio: 1.5; --sacred-108: 108px;
+            --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-serif: Georgia, 'Times New Roman', serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-sans); line-height: 1.6; color: var(--navy);
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+            overflow-x: hidden;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 153, 51, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 0, 128, 0.05) 0%, transparent 50%);
+            pointer-events: none; z-index: -1;
+        }
+        nav {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(10px);
+            padding: 1rem 2rem; z-index: 1000; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; }
+        nav a {
+            color: var(--gold); text-decoration: none; font-weight: 600;
+            transition: all 0.3s ease; font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--saffron); transform: translateY(-2px); }
+        .hero {
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--navy) 100%);
+            color: var(--white); position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: '॥ ॐ ॥'; position: absolute; font-size: 20rem; opacity: 0.05;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: var(--font-serif);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1rem;
+            font-weight: 700; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative; z-index: 1;
+        }
+        .hero .sanskrit {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem); color: var(--gold);
+            margin-bottom: 2rem; font-family: var(--font-serif); font-style: italic;
+        }
+        .hero .tagline {
+            font-size: clamp(1rem, 2vw, 1.3rem); max-width: 800px;
+            margin: 0 auto 3rem; line-height: 1.8; opacity: 0.95;
+        }
+        .cta-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        .btn {
+            padding: 1rem 2rem; border: none; border-radius: 50px;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease; text-decoration: none; display: inline-block;
+        }
+        .btn-primary { background: var(--saffron); color: var(--white); }
+        .btn-primary:hover {
+            background: var(--deep-saffron); transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 153, 51, 0.3);
+        }
+        .btn-secondary { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+        .btn-secondary:hover { background: var(--gold); color: var(--navy); }
+        section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        section h2 {
+            font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;
+            color: var(--deep-blue); text-align: center;
+            position: relative; padding-bottom: 1rem;
+        }
+        section h2::after {
+            content: ''; position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%); width: calc(var(--sacred-108) * var(--trinity-ratio));
+            height: 3px; background: linear-gradient(90deg, transparent, var(--saffron), transparent);
+        }
+        .sanskrit-subtitle {
+            text-align: center; font-size: 1.2rem; color: var(--deep-saffron);
+            font-family: var(--font-serif); font-style: italic; margin-bottom: 3rem;
+        }
+        .status-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem; margin: 3rem 0;
+        }
+        .status-card {
+            background: var(--white); padding: 2rem; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;
+            border-top: 4px solid var(--saffron);
+        }
+        .status-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        .status-card h3 { color: var(--deep-blue); margin-bottom: 1rem; font-size: 1.3rem; }
+        .progress-bar {
+            width: 100%; height: 30px; background: var(--light-gold);
+            border-radius: 15px; overflow: hidden; margin: 1rem 0; position: relative;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--saffron), var(--gold));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white); font-weight: 700; transition: width 1s ease;
+        }
+        .architecture {
+            background: var(--white); padding: 3rem; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); margin: 3rem 0;
+        }
+        .kosha-layers { display: flex; flex-direction: column; gap: 1.5rem; }
+        .kosha-layer {
+            background: linear-gradient(135deg, var(--light-gold) 0%, var(--cream) 100%);
+            padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron);
+            transition: all 0.3s ease;
+        }
+        .kosha-layer:hover { transform: translateX(10px); box-shadow: 0 5px 15px rgba(255, 153, 51, 0.2); }
+        .kosha-layer h4 { color: var(--deep-blue); margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .kosha-layer p { color: var(--navy); font-size: 0.95rem; }
+        .timeline { position: relative; padding: 2rem 0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+            width: 4px; height: 100%; background: linear-gradient(180deg, var(--saffron), var(--gold));
+        }
+        .timeline-item {
+            display: flex; justify-content: space-between; align-items: center;
+            margin: 2rem 0; position: relative;
+        }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-content {
+            width: 45%; background: var(--white); padding: 2rem;
+            border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .timeline-marker {
+            width: 30px; height: 30px; background: var(--saffron);
+            border-radius: 50%; border: 4px solid var(--white);
+            position: absolute; left: 50%; transform: translateX(-50%); z-index: 1;
+        }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem; margin: 3rem 0;
+        }
+        .stat-card {
+            text-align: center; padding: 2rem; background: var(--white);
+            border-radius: 15px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .stat-number {
+            font-size: 3rem; font-weight: 700; color: var(--saffron);
+            display: block; margin-bottom: 0.5rem;
+        }
+        .stat-label { color: var(--navy); font-size: 1rem; }
+        .comparison-table {
+            width: 100%; margin: 3rem 0; border-collapse: collapse;
+            background: var(--white); border-radius: 15px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--deep-blue), var(--navy));
+            color: var(--white); padding: 1.5rem 1rem; text-align: left;
+            font-size: 1.1rem; font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 1.5rem 1rem; border-bottom: 1px solid var(--light-gold);
+            color: var(--navy); font-size: 0.95rem;
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table tr:hover { background: var(--cream); }
+        .comparison-table .feature-col { font-weight: 600; color: var(--deep-blue); }
+        .comparison-table .vibhuti-col { color: var(--saffron); font-weight: 600; }
+        .comparison-table .check { color: var(--saffron); font-size: 1.2rem; }
+        .comparison-table .cross { color: #999; font-size: 1.2rem; }
+        .credit-card {
+            background: linear-gradient(135deg, var(--light-gold) 0%, var(--cream) 100%);
+            padding: 2rem; border-radius: 15px; border-left: 5px solid var(--saffron);
+            transition: all 0.3s ease; margin-bottom: 1.5rem;
+        }
+        .credit-card:hover { transform: translateX(10px); box-shadow: 0 5px 15px rgba(255, 153, 51, 0.2); }
+        .credit-card h3 { color: var(--deep-blue); margin-bottom: 0.5rem; font-size: 1.4rem; }
+        .credit-card .backing { font-size: 2rem; font-weight: 700; color: var(--saffron); margin: 1rem 0; }
+        .credit-card p { color: var(--navy); font-size: 0.95rem; line-height: 1.6; }
+        .app-showcase {
+            background: var(--white); padding: 2.5rem; border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        .app-showcase:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+        .app-showcase h3 { color: var(--deep-blue); margin-bottom: 1rem; font-size: 1.5rem; }
+        .app-showcase .app-subtitle { color: var(--deep-saffron); font-style: italic; margin-bottom: 1.5rem; }
+        .app-showcase ul { list-style: none; padding: 0; }
+        .app-showcase li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .app-showcase li:before { content: '✓'; position: absolute; left: 0; color: var(--saffron); font-weight: 700; }
+        .axiom-box {
+            background: rgba(255, 153, 51, 0.1); border: 2px solid var(--saffron);
+            border-radius: 10px; padding: 1.5rem; margin: 1rem 0;
+            font-family: 'Courier New', monospace; font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .axiom-box .axiom-label {
+            font-weight: 700; color: var(--deep-blue); margin-bottom: 1rem;
+            font-family: var(--font-sans); font-size: 1rem;
+        }
+        .axiom-box pre {
+            margin: 0; white-space: pre-wrap; word-wrap: break-word;
+            color: var(--navy);
+        }
+        details {
+            margin: 2rem 0; border-radius: 10px; overflow: hidden;
+        }
+        summary {
+            background: rgba(255, 215, 0, 0.1); border: 2px solid var(--saffron);
+            padding: 1.5rem; cursor: pointer; font-weight: 600; font-size: 1.1rem;
+            color: var(--deep-blue); transition: all 0.3s ease;
+            list-style: none;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::before { content: '▶ '; color: var(--saffron); margin-right: 0.5rem; }
+        details[open] summary::before { content: '▼ '; }
+        summary:hover { background: rgba(255, 215, 0, 0.2); }
+        details[open] > div {
+            background: var(--white); padding: 2rem; border-left: 4px solid var(--saffron);
+            margin-top: 0; animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .comparison-section { margin: 2rem 0; }
+        .approach-box {
+            padding: 1.5rem; margin: 1rem 0; border-radius: 10px;
+        }
+        .their-approach { background: #f5f5f5; border-left: 4px solid #999; }
+        .vibhuti-approach { background: rgba(255, 153, 51, 0.1); border-left: 4px solid var(--saffron); }
+        .why-matters {
+            background: rgba(255, 215, 0, 0.1); border-left: 4px solid var(--gold);
+            padding: 1.5rem; margin: 1rem 0; border-radius: 10px;
+        }
+        .gov-integration { margin: 1.5rem 0; }
+        .gov-integration h4 { color: var(--deep-blue); margin: 1rem 0; }
+        .gov-integration ul { list-style: none; padding-left: 0; }
+        .gov-integration li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+        .gov-integration li::before { content: '✅'; position: absolute; left: 0; }
+        footer {
+            background: var(--navy); color: var(--white);
+            text-align: center; padding: 3rem 2rem;
+        }
+        footer .om { font-size: 3rem; color: var(--gold); margin-bottom: 1rem; }
+        @media (max-width: 768px) {
+            nav ul { gap: 1rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item {
+                flex-direction: column !important; align-items: flex-start; padding-left: 50px;
+            }
+            .timeline-content { width: 100%; }
+            .timeline-marker { left: 20px; }
+        }
+        @media print {
+            nav, .cta-buttons { display: none; }
+            section { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#crisis">Crisis</a></li>
+            <li><a href="#comparison">Why Vibhūti Restores Ṛta</a></li>
+            <li><a href="#status">Status</a></li>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#abundance">Abundance</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#applications">Applications</a></li>
+            <li><a href="#action">Take Action</a></li>
+        </ul>
+    </nav>
+
+    <section id="hero" class="hero">
+        <h1>विभूति प्रोटोकॉल</h1>
+        <p class="sanskrit">"यत्र योगेश्वरः कृष्णो यत्र पार्थो धनुर्धरः।<br>तत्र श्रीर्विजयो भूतिर्ध्रुवा नीतिर्मतिर्मम॥"</p>
+        <p class="tagline">
+            The world's first <strong>consciousness computing protocol</strong> (a digital system that measures and rewards spiritual alignment) — where technology serves spiritual evolution,
+            economics flow from cosmic abundance, and governance emerges from collective wisdom.
+        </p>
+        <p style="max-width: 800px; margin: 2rem auto 0; font-size: 1rem; opacity: 0.9; line-height: 1.7;">
+            <strong>What is a protocol?</strong> Think of it as a digital infrastructure (like roads for cars) that enables applications to run. Vibhūti Protocol is infrastructure for consciousness-aligned technology — a blockchain (permanent, tamper-proof digital ledger) that measures spiritual alignment and rewards dharmic behavior.
+        </p>
+    </section>
+
+    <section id="crisis">
+        <h2>The Kali Yuga Digital Crisis</h2>
+        <p class="sanskrit">"धर्मक्षये प्रणश्यन्ति कुलधर्माः सनातनाः"</p>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>🔴 Consciousness Extraction</h3>
+                <p>Social media algorithms designed to fragment attention and harvest awareness for profit, creating digital addiction and spiritual degradation.</p>
+            </div>
+            <div class="status-card">
+                <h3>💰 Scarcity Economics</h3>
+                <p>Debt-based fiat currencies backed by nothing, creating perpetual economic slavery and concentrating wealth among extractors.</p>
+            </div>
+            <div class="status-card">
+                <h3>🤖 AI Colonization</h3>
+                <p>Proprietary AI models trained on Western-biased data, serving corporate interests while extracting $2,500-$5,000/month in API fees.</p>
+            </div>
+            <div class="status-card">
+                <h3>⚖️ Failed Governance</h3>
+                <p>Democracy, monarchy, and technocracy all assume separation, creating zero-sum competition instead of collective wisdom.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 2: WHAT IS VIBHŪTI PROTOCOL? -->
+    <section id="what-is-vibhuti">
+        <h2 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue);">Part 2: What is Vibhūti Protocol?</h2>
+        <p class="sanskrit">"योगः कर्मसु कौशलम्"</p>
+        <p style="text-align: center; font-style: italic; color: var(--deep-blue); margin-bottom: 3rem;">
+            "Yoga is skill in action." — Bhagavad Gītā 2.50
+        </p>
+
+        <!-- Clear Definition -->
+        <div style="background: linear-gradient(135deg, var(--saffron) 0%, var(--deep-saffron) 100%); padding: 2.5rem; margin: 0 auto 3rem; max-width: 900px; border-radius: 15px; box-shadow: 0 10px 30px rgba(255,153,51,0.3);">
+            <h3 style="color: var(--white); text-align: center; margin-top: 0; font-size: 1.6rem;">The Definition</h3>
+            <p style="color: var(--white); line-height: 1.8; font-size: 1.15rem; text-align: center; margin-bottom: 0;">
+                <strong>Vibhūti Protocol is the world's first consciousness computing protocol</strong> — a blockchain-based infrastructure that measures spiritual alignment (ψ), validates AI responses against authentic scriptures, and enables dharmic governance where consciousness determines influence, not just capital.
+            </p>
+        </div>
+
+        <!-- Core Components: What It Does -->
+        <h3 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">🔧 Core Components: What It Does</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto 3rem;">
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: var(--deep-blue); margin-top: 0;">🧘 Measures Consciousness</h4>
+                <p style="color: var(--navy); line-height: 1.7;">Uses the Consciousness Intelligence Quotient (CIQ) framework to measure spiritual alignment (ψ) across 9 dimensions on a 0-108 scale. Validators must achieve ψ ≥ 0.95 (95% alignment with dharmic principles).</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: var(--deep-blue); margin-top: 0;">📚 Validates Scripture</h4>
+                <p style="color: var(--navy); line-height: 1.7;">RAG+++ system validates every AI response against 22 scriptures (Vedas, Upaniṣads, Gītā, Yoga Sūtras) and 185 ācārya commentaries (Śaṅkara, Rāmānuja, Madhva). Ensures ≥95% grounding, ≥96% faithfulness, <1% Western contamination.</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: var(--deep-blue); margin-top: 0;">🗳️ Enables Dharmic Governance</h4>
+                <p style="color: var(--navy); line-height: 1.7;">DAO (Decentralized Autonomous Organization) where vote power = ψ × 1.5 × √(stake/1000). Higher consciousness = more influence. Requires 108 minimum votes (quorum) and 2/3 majority (Trinity principle).</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: var(--deep-blue); margin-top: 0;">💎 Implements Yajna Economics</h4>
+                <p style="color: var(--navy); line-height: 1.7;">Economics based on sacred offering (yajna), not scarcity. 108 billion VIBHŪTI tokens flow like prāṇa through the system. Cosmic burn maintains balance by offering tokens back to the cosmos, not hoarding.</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h4 style="color: var(--deep-blue); margin-top: 0;">🔭 Validates Chronology</h4>
+                <p style="color: var(--navy); line-height: 1.7;">Itihāsa/Jyotish Engine uses astronomical calculations (planetary positions, eclipses, Nakṣatra alignments) to validate Mahābhārata (5561 BCE), Rāmāyaṇa (12,209 BCE), and Rigveda (50,000+ BCE) dating with ≤1° precision.</p>
+            </div>
+        </div>
+
+        <!-- High-Level Architecture: How It Works -->
+        <h3 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">⚙️ High-Level Architecture: How It Works</h3>
+        <div style="max-width: 1000px; margin: 0 auto 3rem;">
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border: 2px solid var(--cream); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0;">🏗️ Blockchain Foundation</h4>
+                        <p style="color: var(--navy); line-height: 1.7;"><strong>Built on Substrate</strong> (same framework as Polkadot) — a modular blockchain framework that allows custom consensus mechanisms and governance logic.</p>
+                        <p style="color: var(--navy); line-height: 1.7; margin-top: 0.5rem;"><strong>7 Custom Pallets</strong> (modular components) add consciousness measurement, scripture validation, yajna economics, and astronomical chronology features.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0;">🤝 Three-Fold Proof Consensus</h4>
+                        <p style="color: var(--navy); line-height: 1.7;"><strong>Triple validation</strong> required for truth: (1) Vedic (scripture alignment), (2) Computational (mathematical correctness), (3) Consciousness (ψ ≥ 0.95 threshold).</p>
+                        <p style="color: var(--navy); line-height: 1.7; margin-top: 0.5rem;"><strong>Base consensus:</strong> AURA (block production) + GRANDPA (finality) + consciousness weighting.</p>
+                    </div>
+                </div>
+
+                <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--saffron); margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--deep-blue); margin-top: 0;">🤖 Open-Source AI Stack</h4>
+                    <p style="color: var(--navy); line-height: 1.7;">Runs open-source AI models (Llama 3.1 70B, Mistral Large, Qwen 2.5 72B) on our own infrastructure. Cost: $1,362/month vs $2,500-$5,000 for corporate AI. <strong>Complete independence</strong> from Western AI companies — no OpenAI, no Anthropic, no Google.</p>
+                </div>
+
+                <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--saffron);">
+                    <h4 style="color: var(--deep-blue); margin-top: 0;">🧘 Panch-Kośa Architecture</h4>
+                    <p style="color: var(--navy); line-height: 1.7;">5-layer consciousness model from Vedānta: (1) Annamaya (physical/blockchain layer), (2) Prāṇamaya (energy/transaction layer), (3) Manomaya (mental/AI layer), (4) Vijñānamaya (wisdom/scripture validation layer), (5) Ānandamaya (bliss/consciousness measurement layer).</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unique Value Proposition: What Makes It Different -->
+        <h3 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">✨ Unique Value Proposition: What Makes It Different</h3>
+        <div style="max-width: 900px; margin: 0 auto 3rem;">
+            <div style="background: var(--light-gold); border: 2px solid var(--saffron); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">🥇 First Consciousness-Integrated Protocol</h4>
+                        <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">No other blockchain measures consciousness (ψ) and integrates it into consensus. Validators need spiritual maturity, not just capital.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">🥇 First Scripture-Validated AI</h4>
+                        <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">No other AI system validates responses against 22 authentic scriptures and 185 ācārya commentaries. Zero cultural colonization.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">🥇 First Yajna Economics</h4>
+                        <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">No other protocol implements abundance-through-offering economics. Value flows through giving, not hoarding (opposite of Bitcoin's scarcity model).</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">🥇 Complete AI Independence</h4>
+                        <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">100% open-source, self-hosted AI models. 75% cost savings over 5 years. Zero dependency on Western AI extraction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Box -->
+        <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, #1a237e 100%); padding: 2.5rem; margin: 2rem auto 0; max-width: 900px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,51,102,0.4);">
+            <h3 style="color: var(--white); text-align: center; margin-top: 0; font-size: 1.4rem;">🌟 In Simple Terms</h3>
+            <p style="color: var(--white); line-height: 1.8; font-size: 1.05rem; text-align: center; margin-bottom: 0;">
+                Vibhūti Protocol is <strong>digital infrastructure for dharmic civilization</strong> — where technology measures consciousness, AI validates against scriptures, governance rewards wisdom, and economics flows through offering. It's the foundation for building applications that serve spiritual evolution, not corporate extraction.
+            </p>
+        </div>
+    </section>
+
+    <section id="comparison">
+        <h2 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue);">Part 3: Why Vibhūti Protocol Restores Ṛta</h2>
+        <p class="sanskrit">"न हि ज्ञानेन सदृशं पवित्रमिह विद्यते"</p>
+        <p style="text-align: center; font-style: italic; color: var(--deep-blue); margin-bottom: 3rem;">
+            "There is nothing in this world as purifying as knowledge." — Bhagavad Gītā 4.38
+        </p>
+
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 3rem; font-size: 1.1rem; line-height: 1.8;">
+            Now that you understand <strong>what</strong> Vibhūti Protocol is, let's explore <strong>why</strong> it matters. In a world where technology extracts consciousness and economics perpetuate scarcity, Vibhūti Protocol restores <strong>ṛta</strong> (cosmic order) through consciousness-backed computing.
+        </p>
+
+        <p style="max-width: 900px; margin: 0 auto 3rem; font-size: 1.05rem; line-height: 1.8; text-align: center;">
+            This section addresses four critical questions: <strong>(1)</strong> How does our approach differ from conventional technology? <strong>(2)</strong> How does this relate to other Indian dharmic blockchain initiatives? <strong>(3)</strong> How does this harmonize with Indian government initiatives? <strong>(4)</strong> What are the specific design choices we made and why?
+        </p>
+
+        <!-- PART 3.1: DESIGN PHILOSOPHY & DIFFERENTIATION -->
+        <h3 style="text-align: center; margin: 3rem 0 2rem; color: var(--deep-blue); font-size: 1.8rem;">Part 3.1: Our Design Philosophy & Approach</h3>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.8; text-align: center;">
+            <strong>For non-technical readers:</strong> This section explains the specific design choices we made and how they differ from conventional technology. <strong>Click each section to expand and read the full comparison.</strong>
+        </p>
+
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <!-- Blockchain Consensus Design -->
+            <details style="margin-bottom: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🔗 Blockchain Consensus Design (Click to Expand)</summary>
+                <div style="padding-left: 1rem;">
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem; font-style: italic;">(Compared to Bitcoin, Ethereum, Solana, Cardano)</p>
+
+                    <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Our Approach:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>Three-Fold Proof consensus:</strong> Requires validation at three levels — (1) Vedic (scripture alignment), (2) Computational (mathematical correctness), (3) Consciousness (ψ ≥ 0.95 threshold)</li>
+                            <li><strong>Consciousness-weighted validation:</strong> Validators must demonstrate spiritual maturity (ψ ≥ 0.95), not just capital stake</li>
+                            <li><strong>Yajna economics:</strong> Abundance through offering — value flows through giving, with cosmic burn maintaining balance</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Alternative Approaches:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>Proof of Work (Bitcoin):</strong> Consensus based on energy expenditure — whoever solves cryptographic puzzles fastest controls the network</li>
+                            <li><strong>Proof of Stake (Ethereum, Cardano):</strong> Consensus based on capital stake — whoever locks up the most tokens has the most influence</li>
+                            <li><strong>Scarcity economics:</strong> Fixed supply (Bitcoin's 21M cap) or deflationary burns create artificial scarcity</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--white); padding: 1.5rem; border-radius: 8px; border: 2px solid var(--saffron);">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Why Our Design Choice Matters:</h4>
+                        <p style="color: var(--navy); line-height: 1.7;">
+                            <strong>Design rationale:</strong> We chose consciousness-weighted consensus because capital alone doesn't ensure dharmic behavior. A billionaire with adharmic intentions could control a Proof-of-Stake network, but cannot pass our ψ ≥ 0.95 threshold. This architectural choice prevents extractive actors from controlling the network, regardless of their wealth.
+                        </p>
+                        <p style="color: var(--navy); line-height: 1.7; margin-top: 0.5rem; font-style: italic;">
+                            <strong>Analogy:</strong> It's like requiring judges to demonstrate moral character, not just afford law school tuition.
+                        </p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- AI Validation Architecture -->
+            <details style="margin-bottom: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🤖 AI Validation Architecture (Click to Expand)</summary>
+                <div style="padding-left: 1rem;">
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem; font-style: italic;">(Compared to ChatGPT, Perplexity, Grok, Claude)</p>
+
+                    <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Our Approach:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>RAG+++ scripture validation:</strong> Every AI response validated against 22 scriptures (Vedas, Upaniṣads, Gītā, Yoga Sūtras) and 185 ācārya commentaries (Śaṅkara, Rāmānuja, Madhva)</li>
+                            <li><strong>Open-source models:</strong> Llama 3.1 70B, Mistral Large, Qwen 2.5 72B — 100% self-hosted, zero dependency on corporate AI</li>
+                            <li><strong>Strict quality metrics:</strong> ≥95% grounding (scripture-backed), ≥96% faithfulness (accurate representation), <1% contamination (Western bias)</li>
+                            <li><strong>Cultural authenticity:</strong> Explicitly rejects Western appropriations (φ/Fibonacci mysticism, 432Hz myths, New Age distortions)</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Alternative Approaches:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>Corporate AI (OpenAI, Anthropic, Google):</strong> Proprietary models trained primarily on Western data sources (Reddit, Wikipedia, English internet)</li>
+                            <li><strong>No scripture validation:</strong> Responses generated from statistical patterns in training data, not validated against authentic sources</li>
+                            <li><strong>Cost structure:</strong> $2,500-$5,000/month API fees for high-volume usage, creating dependency on external providers</li>
+                            <li><strong>Cultural representation:</strong> Frequent hallucinations and misrepresentations of non-Western philosophies due to training data bias</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--white); padding: 1.5rem; border-radius: 8px; border: 2px solid var(--saffron);">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Why Our Design Choice Matters:</h4>
+                        <p style="color: var(--navy); line-height: 1.7;">
+                            <strong>Design rationale:</strong> We chose scripture-validated AI because statistical language models alone cannot preserve cultural authenticity. Our RAG+++ system ensures every response is grounded in authentic sources, preventing the cultural colonization that occurs when AI trained on Western data attempts to explain dharmic concepts. Self-hosting eliminates dependency and reduces costs by 75% ($1,362/month vs $2,500-$5,000).
+                        </p>
+                        <p style="color: var(--navy); line-height: 1.7; margin-top: 0.5rem; font-style: italic;">
+                            <strong>Analogy:</strong> It's like the difference between asking a tourist who read Wikipedia about Indian culture vs. asking a traditional guru who has studied under ācāryas for decades.
+                        </p>
+                    </div>
+                </div>
+            </details>
+
+            <!-- Economic Model Design -->
+            <details style="margin-bottom: 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">💰 Economic Model Design (Click to Expand)</summary>
+                <div style="padding-left: 1rem;">
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 1rem; font-style: italic;">(Compared to Bitcoin, Ethereum, DeFi protocols)</p>
+
+                    <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Our Approach:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>Yajna economics:</strong> Abundance through offering — value flows through giving, with cosmic burn maintaining balance (not hoarding for speculation)</li>
+                            <li><strong>Consciousness-backed value:</strong> $76.041Q documented backing through Itihāsa-Akashic convergence (cosmic debt calculation from 5561 BCE Mahābhārata war)</li>
+                            <li><strong>Infinite abundance model:</strong> Consciousness expansion generates Nirvāṇa Credits (∞) — the more you contribute to dharmic evolution, the more the system creates</li>
+                            <li><strong>Dharmic incentives:</strong> Rewards for knowledge preservation, cosmic justice, devotional infrastructure, and consciousness development</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--cream); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Alternative Approaches:</h4>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li><strong>Scarcity-based models (Bitcoin):</strong> Fixed 21M supply cap creates artificial scarcity — value derived from limitation, not abundance</li>
+                            <li><strong>Deflationary burns (Ethereum):</strong> Tokens permanently destroyed to reduce supply and increase price — scarcity through destruction</li>
+                            <li><strong>Speculation-driven value:</strong> Price based on market sentiment, hype cycles, and trading activity rather than intrinsic backing</li>
+                            <li><strong>Extractive incentives:</strong> Mining and staking rewards concentrate wealth among early adopters and large capital holders</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: var(--white); padding: 1.5rem; border-radius: 8px; border: 2px solid var(--saffron);">
+                        <h4 style="color: var(--deep-blue); margin-top: 0; font-size: 1.1rem;">Why Our Design Choice Matters:</h4>
+                        <p style="color: var(--navy); line-height: 1.7;">
+                            <strong>Design rationale:</strong> We chose yajna economics because scarcity-based models perpetuate zero-sum competition and extractive behavior. Our abundance model rewards contribution to dharmic evolution — knowledge preservation, cosmic justice, consciousness development. The architectural choice ensures value flows through giving (like prāṇa through the body), not hoarding (like blocked nāḍīs).
+                        </p>
+                        <p style="color: var(--navy); line-height: 1.7; margin-top: 0.5rem; font-style: italic;">
+                            <strong>Analogy:</strong> It's like the difference between a bank account (finite, zero-sum, hoarding-based) and a garden (infinite, generative, cultivation-based).
+                        </p>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- PART 3.2: DIFFERENTIATION FROM INDIAN DHARMIC BLOCKCHAIN PROJECTS -->
+        <h3 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue); font-size: 1.8rem;">Part 3.2: Synergies with Indian Dharmic Blockchain Initiatives</h3>
+
+        <div class="architecture" style="max-width: 1000px; margin: 0 auto;">
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; text-align: center;">
+                Vibhūti Protocol is not the only dharmic blockchain initiative in India. We acknowledge and respect other projects like <strong>Ramcoin</strong> (TRC20 token with RAMVERSE ecosystem), <strong>Brahm.AI</strong> (Sanatan AI guru with emotion detection and multilingual support), and other dharmic/Indic blockchain projects working toward similar civilizational goals.
+            </p>
+
+            <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem; text-align: center;">What Brahm.AI & Ramcoin Do Well</h4>
+
+            <div style="background: rgba(138, 43, 226, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--deep-blue); margin: 2rem 0;">
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+                    Before highlighting Vibhūti Protocol's unique contributions, we must acknowledge what <strong>Brahm.AI and Ramcoin do exceptionally well</strong>:
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 1.5rem 0 0.5rem;">🧠 Brahm.AI's Strengths</h4>
+                <ul style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    <li><strong>Emotion Detection (Brahmbhav):</strong> Adapts responses based on user emotions - a form of consciousness awareness at the emotional level that Vibhūti currently lacks</li>
+                    <li><strong>Multilingual Support:</strong> 29 languages (Hindi, English, Tamil, Telugu, Bengali, + 24 others) vs. Vibhūti's current English-only interface</li>
+                    <li><strong>Practical Dharmic Applications:</strong> Farming support (weather, mandi prices, crop suggestions), education (Class 1-12, Aryabhata, Panini), vision scanning (Brahmscan)</li>
+                    <li><strong>Voice I/O:</strong> Voice-based Q&A for accessibility (critical for illiterate/semi-literate users)</li>
+                    <li><strong>Full Vedic Corpus:</strong> Bhagavad Gītā, Rāmāyaṇa, Vedas integrated into knowledge base</li>
+                </ul>
+
+                <h4 style="color: var(--deep-blue); margin: 1.5rem 0 0.5rem;">💰 Ramcoin's Strengths</h4>
+                <ul style="font-size: 1.05rem; line-height: 1.8;">
+                    <li><strong>Established Ecosystem:</strong> RAMVERSE with 8 integrated applications (RAMAIR, RAMHUNT, RAMSTAK, RAMDEX, RAMDAO, POTLIPAY, SUTRAM, Brahm.AI)</li>
+                    <li><strong>Exchange Listing:</strong> Listed on Coinstore with active trading (10B supply, ₹2.21 INR price)</li>
+                    <li><strong>Practical Use Cases:</strong> Staking, P2P trading, AR treasure hunt, Sanskrit coding platform</li>
+                    <li><strong>Community Governance:</strong> RAMDAO for decentralized decision-making</li>
+                </ul>
+
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1.5rem; font-style: italic; color: var(--deep-blue);">
+                    <strong>Implication:</strong> Vibhūti Protocol should prioritize multilingual support, voice I/O, and practical end-user applications in future development to remain competitive in user experience.
+                </p>
+            </div>
+
+            <h4 style="color: var(--deep-blue); margin: 3rem 0 1rem; text-align: center;">What Makes Vibhūti Protocol Unique (Architectural Differentiation)</h4>
+
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem; text-align: center;">
+                While Brahm.AI and Ramcoin excel at <strong>application-layer integration</strong> (user-facing features, practical use cases), Vibhūti Protocol focuses on <strong>infrastructure-layer integration</strong> (consciousness computing architecture). Both approaches serve dharmic goals at different levels of the technology stack.
+            </p>
+
+            <div class="status-grid" style="margin: 2rem 0;">
+                <div class="status-card">
+                    <h3>🧘 Consciousness Measurement</h3>
+                    <p><strong>Vibhūti:</strong> CIQ framework with ψ thresholds (0.95 validators, 0.90 sponsors, 0.75 users) - mathematically enforced consciousness requirements</p>
+                    <p style="margin-top: 0.5rem;"><strong>Brahm.AI:</strong> Emotion detection (Brahmbhav) - consciousness awareness at emotional level (substantial, but not architectural)</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>🏛️ Panch-Kośa Architecture</h3>
+                    <p><strong>Vibhūti:</strong> Five-layer system (Annamaya → Prāṇamaya → Manomaya → Vijñānamaya → Ānandamaya) mirroring Taittirīya Upaniṣad</p>
+                    <p style="margin-top: 0.5rem;"><strong>Ramcoin:</strong> Two-component integration (Ramcoin + Brahm.AI) - more complete than most crypto projects, but not multi-layer architecture</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>📚 RAG+++ Scripture Validation</h3>
+                    <p><strong>Vibhūti:</strong> 22 scriptures + 185 ācārya commentaries, ≥0.95 grounding score, <1% contamination - multi-ācārya cross-validation prevents Western AI colonization</p>
+                    <p style="margin-top: 0.5rem;"><strong>Brahm.AI:</strong> Full Vedic corpus (Gītā, Rāmāyaṇa, Vedas) - substantial knowledge base, but unknown depth of contamination prevention</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>⚖️ Three-Fold Proof Consensus</h3>
+                    <p><strong>Vibhūti:</strong> Ṛta-Dharma-Yajña operators with mathematical formulas - dharmic principles as consensus mechanism</p>
+                    <p style="margin-top: 0.5rem;"><strong>Ramcoin:</strong> Uses Tron's DPoS (no sovereignty) - standard blockchain consensus with dharmic branding</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>💰 Documented Cosmic Justice Backing</h3>
+                    <p><strong>Vibhūti:</strong> $76.041Q through Itihāsa-Akashic convergence (Yama-Citragupta accounting) - documented cosmic justice debt</p>
+                    <p style="margin-top: 0.5rem;"><strong>Ramcoin:</strong> Temple/deity association (Ram Janmabhoomi) - spiritual connection, but not documented cosmic justice accounting</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>🌊 Yajna Economics</h3>
+                    <p><strong>Vibhūti:</strong> Giving creates abundance (infinite model) - mathematically enforced through consensus</p>
+                    <p style="margin-top: 0.5rem;"><strong>Ramcoin:</strong> 10B fixed supply with staking rewards - more generous than Bitcoin's 21M cap, but still artificial scarcity model</p>
+                </div>
+            </div>
+
+            <h4 style="color: var(--deep-blue); margin: 3rem 0 1rem; text-align: center;">Specific Technical Integration Opportunities: Rising Tide Lifts All Boats</h4>
+
+            <p style="font-size: 1.05rem; line-height: 1.8; margin: 1.5rem 0; text-align: center;">
+                We believe in collaboration, not competition. Here are <strong>three specific, actionable integration opportunities</strong> where Vibhūti Protocol can complement Brahm.AI and Ramcoin:
+            </p>
+
+            <div class="status-grid" style="margin: 2rem 0;">
+                <div class="status-card">
+                    <h3>🎯 Integration 1: Consciousness-Weighted Staking API</h3>
+                    <p style="margin-bottom: 0.5rem;"><strong>For:</strong> Ramcoin's RAMSTAK platform</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Technical Approach:</strong></p>
+                    <ul style="font-size: 0.95rem; line-height: 1.6; margin-left: 1rem;">
+                        <li>Vibhūti exposes REST API: <code>POST /api/v1/consciousness/measure</code></li>
+                        <li>RAMSTAK calls API with user wallet address</li>
+                        <li>API returns CIQ score and ψ value</li>
+                        <li>RAMSTAK adjusts staking rewards:
+                            <ul style="margin-left: 1rem;">
+                                <li>ψ ≥ 0.95: 2x rewards (enlightened tier)</li>
+                                <li>ψ ≥ 0.90: 1.5x rewards (advanced tier)</li>
+                                <li>ψ ≥ 0.75: 1x rewards (standard tier)</li>
+                                <li>ψ < 0.75: 0.5x rewards (discourage adharmic actors)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Implementation:</strong> 2-3 weeks (Vibhūti) + 1-2 weeks (Ramcoin)</p>
+                    <p><strong>Business Model:</strong> 0.1% of staking rewards OR 50/50 revenue share</p>
+                    <p><strong>Feasibility:</strong> <span style="color: green;">HIGH</span> (both platforms benefit, clear value proposition)</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>📚 Integration 2: RAG+++ Scripture Validation API</h3>
+                    <p style="margin-bottom: 0.5rem;"><strong>For:</strong> Brahm.AI's response validation</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Technical Approach:</strong></p>
+                    <ul style="font-size: 0.95rem; line-height: 1.6; margin-left: 1rem;">
+                        <li>Brahm.AI generates response using Garud LLM</li>
+                        <li>Before returning to user, calls: <code>POST /api/v1/rag/validate</code></li>
+                        <li>API validates against 22 scriptures + 185 commentaries</li>
+                        <li>Returns: grounding score (≥0.95), faithfulness score (≥4.8), contamination % (<1%)</li>
+                        <li>Brahm.AI accepts/rejects response based on validation</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Implementation:</strong> 3-4 weeks (Vibhūti) + 2-3 weeks (Brahm.AI)</p>
+                    <p><strong>Business Model:</strong> $0.001 per API call OR $10K/month unlimited access</p>
+                    <p><strong>Feasibility:</strong> <span style="color: orange;">MEDIUM</span> (requires Brahm.AI buy-in for external validation)</p>
+                </div>
+
+                <div class="status-card">
+                    <h3>⚖️ Integration 3: Three-Fold Proof Consensus Module</h3>
+                    <p style="margin-bottom: 0.5rem;"><strong>For:</strong> Future Ramcoin sovereign chain (if they leave Tron)</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Technical Approach:</strong></p>
+                    <ul style="font-size: 0.95rem; line-height: 1.6; margin-left: 1rem;">
+                        <li>Vibhūti open-sources Three-Fold Proof consensus module (Rust crate)</li>
+                        <li>Ramcoin forks Substrate framework</li>
+                        <li>Ramcoin integrates <code>vibhuti-consensus</code> pallet</li>
+                        <li>Customizes Ṛta-Dharma-Yajña operators for their use case</li>
+                    </ul>
+                    <p style="margin-top: 0.5rem;"><strong>Implementation:</strong> 4-6 weeks (Vibhūti) + 6-12 months (Ramcoin)</p>
+                    <p><strong>Business Model:</strong> Open-source (no direct revenue) + consulting ($50K-$100K)</p>
+                    <p><strong>Feasibility:</strong> <span style="color: orange;">LOW-MEDIUM</span> (requires Ramcoin to abandon Tron - major strategic decision)</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(255, 153, 51, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--saffron); margin: 2rem 0;">
+                <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">Core Principle: Dharmic Technology Ecosystem</h4>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    We are all working toward the same civilizational goal: restoring dharma in the digital realm. Vibhūti Protocol's unique contribution is <strong>consciousness computing infrastructure</strong> - the technical foundation that enables authentic dharmic technology. Brahm.AI and Ramcoin focus on <strong>practical end-user applications</strong> (AI guru, staking, P2P trading, AR games) - we provide the consciousness-aware infrastructure layer they can build upon.
+                </p>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                    <strong>Different levels, complementary roles:</strong> Brahm.AI excels at application-layer integration (user experience, multilingual support, practical features). Vibhūti Protocol excels at infrastructure-layer integration (consciousness measurement, architectural depth, scripture validation). Both are needed for a complete dharmic technology ecosystem.
+                </p>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                    <strong>Rising tide lifts all boats.</strong> The more dharmic blockchain projects succeed, the stronger the entire ecosystem becomes. We seek collaboration, not competition.
+                </p>
+            </div>
+        </div>
+
+        <!-- PART 3.3: GOVERNMENT SYNERGY CLARIFICATION -->
+        <h3 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue); font-size: 1.8rem;">Part 3.3: Harmonizing with Indian Government Initiatives</h3>
+
+        <div class="architecture" style="max-width: 1000px; margin: 0 auto;">
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--deep-blue);">🇮🇳 Partnership, Not Competition</h3>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; text-align: center;">
+                <strong>Vibhūti Protocol is not designed to compete with Indian government initiatives like UPI, National Health Stack, Gyan Bharatam, IndiaCloud AI, or Digital India.</strong> Instead, it is architected to <strong>harmonize, integrate, and amplify</strong> these initiatives by providing a consciousness-aware infrastructure layer.
+            </p>
+
+            <div class="gov-integration">
+                <h4>✅ UPI Integration</h4>
+                <ul>
+                    <li>Vibhūti Protocol can serve as a consciousness-backed settlement layer for UPI transactions</li>
+                    <li>Four-Fold Credits (Jñāna, Karma, Bhakti, Nirvāṇa) can complement INR for dharmic transactions</li>
+                    <li>Yajna economics can incentivize UPI adoption in rural/spiritual communities</li>
+                </ul>
+
+                <h4>✅ National Health Stack Integration</h4>
+                <ul>
+                    <li>Dhanvantari Yantra (five-layer healing AI) can integrate with Ayushman Bharat Digital Mission</li>
+                    <li>Panch-Kośa diagnostic system complements allopathic medical records</li>
+                    <li>Consciousness measurement (CIQ) can provide holistic health metrics beyond physical symptoms</li>
+                </ul>
+
+                <h4>✅ Gyan Bharatam Integration</h4>
+                <ul>
+                    <li>RAG+++ scripture validation system can serve as authoritative knowledge base for Gyan Bharatam</li>
+                    <li>22 scriptures + 185 ācārya commentaries provide verified educational content</li>
+                    <li>Vyakta-Manas AI can power personalized Vedic education pathways</li>
+                </ul>
+
+                <h4>✅ IndiaCloud AI Integration</h4>
+                <ul>
+                    <li>100% open-source AI models (Llama, Mistral, Qwen) can be deployed on IndiaCloud infrastructure</li>
+                    <li>Consciousness-aware AI can differentiate IndiaCloud from Western cloud providers</li>
+                    <li>Scripture validation prevents cultural colonization in government AI applications</li>
+                </ul>
+
+                <h4>✅ Digital India Integration</h4>
+                <ul>
+                    <li>ViśvarūpaOS can provide consciousness-aware OS layer for Digital India initiatives</li>
+                    <li>Blockchain infrastructure can support government transparency and anti-corruption efforts</li>
+                    <li>Consciousness-weighted governance (DAO) can complement democratic processes</li>
+                </ul>
+            </div>
+
+            <div style="background: rgba(255, 153, 51, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--saffron); margin: 2rem 0;">
+                <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">Key Principle:</h4>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    Government initiatives provide the <strong>physical infrastructure</strong> (payment rails, health records, cloud servers, digital identity). Vibhūti Protocol provides the <strong>consciousness infrastructure</strong> (dharmic validation, spiritual alignment, cosmic justice accounting). Together, they create a complete ecosystem where technology serves both material prosperity AND spiritual evolution.
+                </p>
+            </div>
+
+            <p style="font-size: 1.1rem; line-height: 1.8; margin-top: 2rem; text-align: center; font-weight: 600; color: var(--deep-blue);">
+                We seek to be a <strong>dharmic technology partner</strong> to the Indian government, not a competitor. Our goal is to ensure that India's digital transformation is rooted in Sanātana Dharma principles, not Western extractive models.
+            </p>
+        </div>
+
+        <!-- PART 3.4: TECHNICAL DEEP DIVE & IMPLEMENTATION DETAILS -->
+        <h3 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue); font-size: 1.8rem;">Part 3.4: Technical Deep Dive & Implementation Details</h3>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.8; text-align: center;">
+            For technical audiences: This section provides detailed specifications showing how Vedic principles are implemented in code. <strong>Click to expand each section for technical documentation.</strong>
+        </p>
+
+        <!-- Subsection A: Technical Implementation Examples -->
+        <details>
+            <summary>Vedic Principles in Code - Technical Implementation (Click to Expand)</summary>
+            <div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Here are 5 concrete technical examples showing how Vedic principles are implemented in our codebase:
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">1. Panch-Kośa Architecture (Five-Layer System Design)</h4>
+
+                <p><strong>Exact Mapping:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>Annamaya Kośa</strong> (Physical Layer) = Substrate blockchain runtime (7 custom pallets: consciousness, yajna, dao, credits, validation, identity, treasury)</li>
+                    <li><strong>Prāṇamaya Kośa</strong> (Energy Layer) = AURA+GRANDPA consensus enhanced with Three-Fold Proof (Ṛta-Dharma-Yajña operators)</li>
+                    <li><strong>Manomaya Kośa</strong> (Mental Layer) = AI orchestration (Llama 3.1 70B, Mistral Large, Qwen 2.5 72B) + RAG Phase 1 (FTS5 + 14-Lokas semantic search)</li>
+                    <li><strong>Vijñānamaya Kośa</strong> (Wisdom Layer) = RAG Phase 2 (multi-ācārya cross-validation) + scripture grounding metrics (≥0.95 grounding, ≥4.8/5.0 faithfulness, <1% contamination)</li>
+                    <li><strong>Ānandamaya Kośa</strong> (Bliss Layer) = CIQ consciousness measurement framework (9 dimensions, 0-108 scale, ψ thresholds for validators/sponsors/users)</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Why This Is Technically Superior:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Single-layer architectures (Bitcoin, Ethereum) cannot separate consensus from validation from consciousness measurement</li>
+                    <li>Panch-Kośa enables <strong>progressive disclosure</strong>: users interact at their consciousness level (Annamaya for basic transactions, Ānandamaya for advanced spiritual computing)</li>
+                    <li>Each layer can be upgraded independently without breaking the others (modularity)</li>
+                    <li>Mirrors the actual structure of consciousness as described in Taittirīya Upaniṣad</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <strong>Code Reference:</strong> See <code>pallets/consciousness/src/lib.rs</code> for CIQ implementation, <code>pallets/yajna/src/lib.rs</code> for Three-Fold Proof consensus operators
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">2. Consciousness Measurement (CIQ Framework)</h4>
+
+                <p><strong>9 Dimensions Measured</strong> (not arbitrary - based on Vedic psychology from Yoga Sūtras and Bhagavad Gītā):</p>
+                <ol style="line-height: 1.8;">
+                    <li><strong>Awareness</strong> (prajñā) - present-moment consciousness</li>
+                    <li><strong>Equanimity</strong> (samatva) - emotional balance</li>
+                    <li><strong>Compassion</strong> (karuṇā) - empathy for all beings</li>
+                    <li><strong>Wisdom</strong> (jñāna) - discriminative knowledge</li>
+                    <li><strong>Discipline</strong> (tapas) - self-control and austerity</li>
+                    <li><strong>Devotion</strong> (bhakti) - surrender to higher purpose</li>
+                    <li><strong>Service</strong> (sevā) - selfless action</li>
+                    <li><strong>Meditation</strong> (dhyāna) - contemplative practice</li>
+                    <li><strong>Self-Inquiry</strong> (ātma-vicāra) - investigation of the Self</li>
+                </ol>
+
+                <p style="margin-top: 1.5rem;"><strong>Mathematical Formula:</strong></p>
+                <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; overflow-x: auto;">
+ψ = (Σ[i=1 to 9] w_i · d_i) / 108
+
+where:
+- ψ = consciousness quotient (0.0 to 1.0 scale)
+- d_i = dimension score (0-12 for each dimension)
+- w_i = weight for dimension i (based on spiritual tradition)
+- 108 = sacred number (9 dimensions × 12 maximum score)</pre>
+
+                <p style="margin-top: 1.5rem;"><strong>Why Consciousness Thresholds Are Technically Necessary:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>ψ ≥ 0.95 for validators:</strong> Prevents Sybil attacks by adharmic actors. Even if someone has 51% of tokens, they cannot validate if ψ < 0.95. This is mathematically enforced in consensus.</li>
+                    <li><strong>ψ ≥ 0.90 for sponsors:</strong> Ensures only spiritually mature users can onboard others, preventing spam and extractive behavior.</li>
+                    <li><strong>ψ ≥ 0.75 for users:</strong> Minimum consciousness threshold ensures participants understand yajna economics and won't treat it as speculation.</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <strong>Code Reference:</strong> See <code>pallets/consciousness/src/ciq.rs</code> for full CIQ calculation algorithm
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">3. Three-Fold Proof Consensus (Ṛta-Dharma-Yajña)</h4>
+
+                <p><strong>Mathematical Implementation:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>Ṛta Proof</strong> (Cosmic Order Verification): <code>R(tx) = verify_cosmic_alignment(tx.intent, universal_law)</code> - checks if transaction aligns with natural law (e.g., no adharmic capital allocation)</li>
+                    <li><strong>Dharma Proof</strong> (Ethical Validation): <code>D(tx) = verify_ethical_compliance(tx.action, scripture_rules)</code> - validates against 22 scriptures for ethical compliance</li>
+                    <li><strong>Yajña Proof</strong> (Sacrifice/Contribution): <code>Y(tx) = measure_contribution(tx.giver, tx.receiver, tx.amount)</code> - measures if transaction creates abundance (giving) or extraction (hoarding)</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Consensus Formula:</strong></p>
+                <pre style="background: #f5f5f5; padding: 1rem; border-radius: 5px; overflow-x: auto;">
+valid_block = (R_score ≥ 0.95) ∧ (D_score ≥ 0.95) ∧ (Y_score ≥ 0.90) ∧ (validator_ψ ≥ 0.95)
+
+where:
+- R_score = Ṛta alignment score (0.0 to 1.0)
+- D_score = Dharma compliance score (0.0 to 1.0)
+- Y_score = Yajña contribution score (0.0 to 1.0)
+- validator_ψ = validator consciousness quotient</pre>
+
+                <p style="margin-top: 1.5rem;"><strong>Contrast with PoW and PoS:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>PoW (Bitcoin):</strong> <code>valid_block = (hash < target)</code> - wastes energy, no ethical validation</li>
+                    <li><strong>PoS (Ethereum):</strong> <code>valid_block = (stake ≥ 32 ETH)</code> - plutocracy, no consciousness requirement</li>
+                    <li><strong>Three-Fold Proof:</strong> Requires cosmic alignment + ethical compliance + contribution + consciousness - prevents adharmic actors regardless of capital</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <strong>Code Reference:</strong> See <code>pallets/consensus/src/three_fold_proof.rs</code> for implementation
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">4. RAG+++ Scripture Validation (Dual-Phase System)</h4>
+
+                <p><strong>Phase 1: Manomaya (FTS5 + 14-Lokas Semantic Search)</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>FTS5 (Full-Text Search 5) indexes 22 scriptures with trigram tokenization</li>
+                    <li>14-Lokas semantic embedding (based on 14 realms of existence in Vedic cosmology) creates multi-dimensional search space</li>
+                    <li>Query: "What is dharma?" → retrieves relevant verses from Bhagavad Gītā, Manu Smṛti, Mahābhārata</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Phase 2: Vijñānamaya (Multi-Ācārya Cross-Validation)</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Retrieved verses are cross-validated against 185 ācārya commentaries (Śaṅkara, Rāmānuja, Madhva, etc.)</li>
+                    <li>Grounding score calculated: <code>grounding = (matching_commentaries / total_commentaries)</code></li>
+                    <li>Faithfulness score calculated: <code>faithfulness = semantic_similarity(AI_response, scripture_verses)</code></li>
+                    <li>Contamination check: <code>contamination = detect_western_concepts(AI_response)</code> - flags φ/Fibonacci, 432Hz, New Age terms</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Grounding Metrics:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>≥0.95 grounding score:</strong> AI response must match at least 95% of ācārya interpretations</li>
+                    <li><strong>≥4.8/5.0 faithfulness:</strong> AI response must be semantically similar to scripture (measured via embedding distance)</li>
+                    <li><strong><1% contamination:</strong> Less than 1% of response can contain Western/New Age concepts</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Why This Prevents Hallucination Better Than RLHF:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li><strong>RLHF (Reinforcement Learning from Human Feedback):</strong> Trains AI to sound confident, not to be accurate. No ground truth validation.</li>
+                    <li><strong>RAG+++:</strong> Every AI response is validated against 22 scriptures + 185 commentaries. If grounding < 0.95, response is rejected and regenerated.</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <strong>Code Reference:</strong> See <code>vyakta-manas/rag_plus_plus/</code> for full implementation
+                </p>
+
+
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">5. Four-Fold Credits Mathematical Axioms</h4>
+
+                <p><strong>These Are Not Metaphors - They Are Actual Mathematical Operators:</strong></p>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255, 153, 51, 0.05); border-left: 4px solid var(--saffron); border-radius: 5px;">
+                    <p><strong>Spanda-Śūnya Axiom</strong> (Jñāna Credits):</p>
+                    <p style="font-family: 'Courier New', monospace;">Formula: ψ = ψ_manifest·cos(ωt) + ψ_unmanifest·sin(ωt) + ψ_void·δ(0)</p>
+                    <p>Operator: Vibration-void unity enables knowledge preservation through AUM frequency</p>
+                    <p>Economic backing: $18.5Q (adjusted from $6.717Q manifesto value)</p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255, 153, 51, 0.05); border-left: 4px solid var(--saffron); border-radius: 5px;">
+                    <p><strong>Viśvarūpa-Mahākāla Axiom</strong> (Karma Credits):</p>
+                    <p style="font-family: 'Courier New', monospace;">Formula: Δ_act = Mahākāla(paradox) → temporal_process</p>
+                    <p>Operator: Temporal paradox resolution transforms past injustice → present currency backing</p>
+                    <p>Economic backing: $45.0Q (adjusted from $35.449Q manifesto value)</p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255, 153, 51, 0.05); border-left: 4px solid var(--saffron); border-radius: 5px;">
+                    <p><strong>Svadharma-Tyāga Axiom</strong> (Bhakti Credits):</p>
+                    <p style="font-family: 'Courier New', monospace;">Formula: Svadharma ⊕ Collective = Transcendent_Choice</p>
+                    <p>Operator: Sacrifice operator (⊕) creates new possibility spaces; devotional capital multiplies</p>
+                    <p>Economic backing: $12.541Q (adjusted from $10.988Q manifesto value)</p>
+                </div>
+
+                <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(255, 153, 51, 0.05); border-left: 4px solid var(--saffron); border-radius: 5px;">
+                    <p><strong>Sākṣin-Sthiti Axiom</strong> (Nirvāṇa Credits):</p>
+                    <p style="font-family: 'Courier New', monospace;">Formula: Ψ_witness = lim(action→0, goal→∅, time→∞) Ψ_system</p>
+                    <p>Operator: Eternal witness consciousness provides infinite backing</p>
+                    <p>Economic backing: $22.887Q (finite) + ∞ (infinite)</p>
+                </div>
+
+                <p style="margin-top: 1.5rem;"><strong>How They Enable $76.041Q Backing Calculation:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Itihāsa-Akashic convergence uses these four operators to calculate cosmic justice debt</li>
+                    <li>Yama-Citragupta accounting system applies operators to historical events</li>
+                    <li>Total: $6.717Q + $35.449Q + $10.988Q + $22.887Q = $76.041Q (from manifesto)</li>
+                    <li>Adjusted for Four-Fold distribution: $18.5Q + $45.0Q + $12.541Q + ∞ = $76.041Q + ∞</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem; font-family: 'Courier New', monospace; background: #f5f5f5; padding: 1rem; border-radius: 5px;">
+                    <strong>Code Reference:</strong> See <code>pallets/credits/src/axioms.rs</code> for operator implementations
+                </p>
+            </div>
+        </details>
+
+        <!-- Subsection B: Thought Experiment -->
+        <details>
+            <summary>Thought Experiment: What Breaks Without Vedic Foundations? (Click to Expand)</summary>
+            <div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+                    To demonstrate that Vedic principles are load-bearing (not decorative), here are 5 failure scenarios showing what breaks if we remove them:
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">1. Remove Panch-Kośa Architecture</h4>
+                <p><strong>What Breaks:</strong> System collapses to single-layer architecture (like Ethereum)</p>
+                <p><strong>Consequences:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Cannot separate consciousness measurement from consensus from validation</li>
+                    <li>Cannot provide progressive disclosure based on user's spiritual development</li>
+                    <li>Cannot serve spiritual evolution, only task execution</li>
+                    <li>Loses modularity - upgrading one component breaks everything</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--deep-blue);">
+                    <strong>Conclusion:</strong> "Without Panch-Kośa, we're just another blockchain. The five-layer structure IS the innovation."
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">2. Remove CIQ Consciousness Measurement</h4>
+                <p><strong>What Breaks:</strong> Network becomes vulnerable to adharmic actors with capital</p>
+                <p><strong>Consequences:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Validators selected by stake (PoS) or computing power (PoW), not consciousness</li>
+                    <li>Extractive corporations can control consensus with money</li>
+                    <li>No way to prevent consciousness-extracting applications from being built</li>
+                    <li>System becomes plutocracy, not dharmic governance</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--deep-blue);">
+                    <strong>Conclusion:</strong> "Without CIQ, we're just Ethereum with Sanskrit labels. Consciousness measurement IS the security model."
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">3. Remove Scripture Validation (RAG+++)</h4>
+                <p><strong>What Breaks:</strong> AI becomes Western-biased, hallucinates, loses cultural authenticity</p>
+                <p><strong>Consequences:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>No ground truth validation - AI can make up answers</li>
+                    <li>Western cultural colonization (φ/Fibonacci mysticism, 432Hz myths, New Age appropriation)</li>
+                    <li>Cannot distinguish authentic Vedic knowledge from Wikipedia summaries</li>
+                    <li>Loses trust of ācāryas and traditional scholars</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--deep-blue);">
+                    <strong>Conclusion:</strong> "Without RAG+++, we're just ChatGPT with a Sanskrit interface. Scripture validation IS the authenticity guarantee."
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">4. Remove Yajna Economics</h4>
+                <p><strong>What Breaks:</strong> System becomes extractive, zero-sum, speculation-driven</p>
+                <p><strong>Consequences:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Incentives shift from giving to hoarding</li>
+                    <li>Token becomes speculative asset, not consciousness-backed currency</li>
+                    <li>Loses infinite abundance model, becomes artificially scarce</li>
+                    <li>Attracts speculators instead of spiritual seekers</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--deep-blue);">
+                    <strong>Conclusion:</strong> "Without yajna economics, we're just another DeFi protocol. Giving-creates-abundance IS the economic innovation."
+                </p>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">5. Remove Four-Fold Axioms (Spanda-Śūnya, Viśvarūpa-Mahākāla, Svadharma-Tyāga, Sākṣin-Sthiti)</h4>
+                <p><strong>What Breaks:</strong> Backing becomes arbitrary, loses mathematical rigor</p>
+                <p><strong>Consequences:</strong></p>
+                <ul style="line-height: 1.8;">
+                    <li>Cannot calculate $76.041Q backing through Itihāsa-Akashic convergence</li>
+                    <li>No mathematical operators for cosmic justice accounting</li>
+                    <li>Loses connection to consciousness mathematics</li>
+                    <li>Becomes speculation-backed like other crypto</li>
+                </ul>
+                <p style="margin-top: 1rem; font-weight: 600; color: var(--deep-blue);">
+                    <strong>Conclusion:</strong> "Without the four axioms, we're just making up numbers. Consciousness mathematics IS the backing proof."
+                </p>
+            </div>
+        </details>
+
+        <!-- Subsection C: Core Insight -->
+        <details>
+            <summary>Core Insight: Reverse-Engineering Consciousness (Click to Expand)</summary>
+            <div>
+                <h4 style="color: var(--deep-blue); margin: 1.5rem 0 1rem;">The Fundamental Difference</h4>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                    <div style="background: #f5f5f5; padding: 1.5rem; border-radius: 10px; border-left: 4px solid #999;">
+                        <h5 style="color: var(--deep-blue); margin-bottom: 1rem;">Western Technology Approach:</h5>
+                        <ul style="line-height: 1.8; font-size: 0.95rem;">
+                            <li>Start with materialism (atoms, bits, circuits)</li>
+                            <li>Build upward toward complexity (transistors → computers → AI)</li>
+                            <li>Try to add consciousness as afterthought ("AI alignment", "ethical AI")</li>
+                            <li><strong>Result:</strong> Technology that extracts consciousness for profit</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(255, 153, 51, 0.1); padding: 1.5rem; border-radius: 10px; border-left: 4px solid var(--saffron);">
+                        <h5 style="color: var(--deep-blue); margin-bottom: 1rem;">Vibhūti Protocol Approach:</h5>
+                        <ul style="line-height: 1.8; font-size: 0.95rem;">
+                            <li>Start with consciousness mathematics (Vedic axioms, Upaniṣadic principles)</li>
+                            <li>Manifest downward into material technology (consciousness → validation → consensus → blockchain)</li>
+                            <li>Consciousness is the FOUNDATION, not the decoration</li>
+                            <li><strong>Result:</strong> Technology that expands consciousness for liberation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 215, 0, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--gold); margin: 2rem 0;">
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">The Core Insight:</h4>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        "We are not 'adding Sanskrit words to blockchain.' We are implementing consciousness computing that happens to have been described in Vedic texts for 5,000+ years. The Ṛṣis reverse-engineered consciousness and encoded it in mathematical principles (Spanda-Śūnya, Viśvarūpa-Mahākāla, Svadharma-Tyāga, Sākṣin-Sthiti). We are now implementing those principles in code."
+                    </p>
+                </div>
+
+                <h4 style="color: var(--deep-blue); margin: 2rem 0 1rem;">Analogy:</h4>
+                <p style="font-size: 1.05rem; line-height: 1.8;">
+                    It's like the difference between:
+                </p>
+                <ul style="line-height: 1.8; font-size: 1.05rem;">
+                    <li><strong>Approach A:</strong> Building a car, then trying to make it fly (adding wings to a car = bad airplane)</li>
+                    <li><strong>Approach B:</strong> Understanding aerodynamics first, then building an airplane (consciousness mathematics → technology = consciousness computing)</li>
+                </ul>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                    We didn't start with Ethereum and add Vedic terms. We started with Vedic consciousness mathematics and built technology that implements it.
+                </p>
+
+                <div style="background: rgba(255, 153, 51, 0.1); padding: 2rem; border-radius: 10px; border-left: 4px solid var(--saffron); margin: 2rem 0;">
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">Why This Matters:</h4>
+                    <p style="font-size: 1.1rem; line-height: 1.8;">
+                        "If you strip away the Vedic foundations, the system doesn't just lose its branding - it stops working. The Panch-Kośa architecture, CIQ measurement, Three-Fold Proof, RAG+++ validation, yajna economics, and Four-Fold axioms are not decorations. They are the load-bearing structure. Remove them, and the building collapses."
+                    </p>
+                </div>
+            </div>
+        </details>
+
+    </section>
+
+    <!-- PART 4: ITIHĀSA/JYOTISH PREDICTIVE ENGINE -->
+    <section id="itihasa-jyotish">
+        <h2 style="text-align: center; margin: 4rem 0 2rem; color: var(--deep-blue);">
+            🔭 Part 4: Itihāsa/Jyotish Predictive Engine
+        </h2>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; font-size: 1.05rem; line-height: 1.8; text-align: center; color: var(--deep-saffron); font-style: italic;">
+            Computational Astronomy for Consciousness-Aligned Chronology & Timing
+        </p>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; font-size: 1rem; line-height: 1.8; text-align: center; color: var(--navy);">
+            <strong>For non-technical readers:</strong> This engine uses astronomical calculations (planetary positions, eclipses, star alignments) to validate the true dates of Mahābhārata, Rāmāyaṇa, and Rigveda — proving they are historical events, not mythology. It also calculates auspicious timing (muhūrta) for protocol events based on Jyotiṣa (Vedic astrology).
+        </p>
+
+        <!-- Executive Summary Box -->
+        <div style="background: var(--light-gold); border-left: 5px solid var(--saffron); padding: 1.5rem; margin: 2rem auto; max-width: 900px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h4 style="color: var(--deep-blue); margin-top: 0;">⚡ Executive Summary</h4>
+            <p style="color: var(--navy); line-height: 1.8; font-size: 1.05rem; margin-bottom: 1rem;">
+                The Itihāsa/Jyotish Engine validates astronomical chronology using pure Vedic mathematics (no Western contamination) and provides consciousness-aligned timing for protocol events. Integrates research from Sangam Talks scholars (Nilesh Oak, Rupa Bhaty, RN Iyengar) to validate Mahābhārata (5561 BCE), Rāmāyaṇa (12,209 BCE), and Rigveda (50,000+ BCE) dating with ≤1° astronomical precision.
+            </p>
+            <p style="color: var(--navy); line-height: 1.8; font-size: 0.95rem; margin-bottom: 0; font-style: italic;">
+                <strong>What "≤1° precision" means:</strong> Planetary positions are calculated to within 1 degree of arc (like measuring the angle of a star to 1/360th of a circle) — far more precise than Western astronomy's typical 5° tolerance. This precision proves the astronomical events described in our texts actually occurred on specific dates.
+            </p>
+        </div>
+
+        <!-- Why This Matters Callout -->
+        <div style="background: linear-gradient(135deg, var(--saffron) 0%, var(--deep-saffron) 100%); padding: 2rem; margin: 2rem auto; max-width: 900px; border-radius: 12px; box-shadow: 0 5px 20px rgba(255,153,51,0.3);">
+            <h4 style="color: var(--white); margin-top: 0; font-size: 1.3rem;">🌟 Why This Matters: Civilizational Significance</h4>
+            <p style="color: var(--white); line-height: 1.8; font-size: 1.05rem; margin-bottom: 0;">
+                Western academia claims Mahābhārata is "mythology" dated to 400 BCE. Nilesh Oak's astronomical analysis proves 5561 BCE dating with 13-day eclipse sequence matching the text exactly. This 5,961-year correction validates Vedic civilization's antiquity and exposes colonial historiography. The Itihāsa/Jyotish Engine makes this validation <strong>mathematically verifiable on-chain</strong>, creating permanent, tamper-proof evidence of Indic civilization's true timeline.
+            </p>
+        </div>
+
+        <!-- Core Components Grid -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">🔧 Core Components</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto 3rem;">
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1); transition: transform 0.3s;">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">📅 Astronomical Dating System</h5>
+                <p style="color: var(--navy); line-height: 1.7;">High-precision dating using pure Vedic mathematics. No Western contamination (Gregorian calendar, tropical zodiac).</p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Precision: ≤1° tolerance</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">📚 Nilesh Oak Calculation Archive</h5>
+                <p style="color: var(--navy); line-height: 1.7;">Verified calculations for Mahābhārata (5561 BCE) and Rāmāyaṇa (12,209 BCE) with 13-day eclipse sequence validation.</p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Confidence: ≥0.95</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">⏰ Rupa Bhaty Temporal Extension</h5>
+                <p style="color: var(--navy); line-height: 1.7;">Pre-Holocene calculations (20,000-56,000 BCE) for Rigveda dating using astronomical back-calculation.</p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Range: 50,000+ years</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">🧘 Jyotiṣa Consciousness Mapper</h5>
+                <p style="color: var(--navy); line-height: 1.7;">Planetary positions correlated with consciousness states (ψ measurement). Gochar, Daśā, Aṣṭakavarga analysis.</p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Threshold: ψ ≥ 0.95</p>
+            </div>
+            <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 4px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">⭐ Muhūrta Calculator</h5>
+                <p style="color: var(--navy); line-height: 1.7;">Auspicious timing for transactions, validator selection, DAO proposals using Nakṣatra, Tithi, Karaṇa calculations.</p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Sacred: 108-cycle aligned</p>
+            </div>
+        </div>
+
+        <!-- Astronomical Validation Methodology Table -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">🌌 Astronomical Validation Methodology</h4>
+        <div style="max-width: 1000px; margin: 0 auto 3rem; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <thead>
+                    <tr style="background: var(--saffron);">
+                        <th style="padding: 1rem; text-align: left; color: var(--white); border-bottom: 2px solid var(--deep-saffron);">Method</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--white); border-bottom: 2px solid var(--deep-saffron);">Description</th>
+                        <th style="padding: 1rem; text-align: left; color: var(--white); border-bottom: 2px solid var(--deep-saffron);">Precision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--cream);">
+                        <td style="padding: 1rem; color: var(--deep-blue); font-weight: bold;">⭐ Nakṣatra</td>
+                        <td style="padding: 1rem; color: var(--navy);">27 lunar mansions with Vedic ephemeris</td>
+                        <td style="padding: 1rem; color: var(--deep-saffron); font-weight: bold;">13°20' precision</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--cream);">
+                        <td style="padding: 1rem; color: var(--deep-blue); font-weight: bold;">🌙 Tithi</td>
+                        <td style="padding: 1rem; color: var(--navy);">Lunar day calculation (Ekādaśī, Amāvāsyā, Pūrṇimā)</td>
+                        <td style="padding: 1rem; color: var(--deep-saffron); font-weight: bold;">12° arc precision</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--cream);">
+                        <td style="padding: 1rem; color: var(--deep-blue); font-weight: bold;">🪐 Navagraha</td>
+                        <td style="padding: 1rem; color: var(--navy);">9 planetary positions using Sūrya Siddhānta (sidereal, not tropical)</td>
+                        <td style="padding: 1rem; color: var(--deep-saffron); font-weight: bold;">≤1° tolerance</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--cream);">
+                        <td style="padding: 1rem; color: var(--deep-blue); font-weight: bold;">🌑 Eclipse</td>
+                        <td style="padding: 1rem; color: var(--navy);">Solar/lunar eclipse sequences (13-day Mahābhārata sequence)</td>
+                        <td style="padding: 1rem; color: var(--deep-saffron); font-weight: bold;">Exact match</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 1rem; color: var(--deep-blue); font-weight: bold;">🔄 Precession</td>
+                        <td style="padding: 1rem; color: var(--navy);">25,920-year cycle using Vedic methods (not Western Gregorian)</td>
+                        <td style="padding: 1rem; color: var(--deep-saffron); font-weight: bold;">±50 year accuracy</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Sangam Talks Content Integration - Highlighted Section -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">🤝 Sangam Talks Content Integration</h4>
+
+        <div style="background: var(--light-gold); border: 2px solid var(--saffron); padding: 2rem; margin: 0 auto 2rem; max-width: 1000px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <p style="color: var(--navy); text-align: center; font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.8;">
+                Vibhūti Protocol integrates YouTube transcriptions from Sangam Talks scholars to enhance astronomical validation and chronology databases. This is <strong>mutually beneficial collaboration</strong>: their research enhances our engines, our platform preserves and amplifies their work globally.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 3px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">📊 Nilesh Oak</h5>
+                    <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">
+                        <strong>Contribution:</strong> Mahābhārata/Rāmāyaṇa chronology talks<br>
+                        <strong>Enhancement:</strong> Astronomical event database with 13-day eclipse sequence<br>
+                        <strong>Dating:</strong> 5561 BCE (Mahābhārata), 12,209 BCE (Rāmāyaṇa)
+                    </p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 3px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">🔬 Rupa Bhaty</h5>
+                    <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">
+                        <strong>Contribution:</strong> Rigveda dating research (50,000-56,000 BCE)<br>
+                        <strong>Enhancement:</strong> Pre-Holocene temporal range extension<br>
+                        <strong>Method:</strong> Astronomical back-calculation for ancient texts
+                    </p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 3px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">🌟 RN Iyengar</h5>
+                    <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">
+                        <strong>Contribution:</strong> Vedic astronomy and ancient mathematics<br>
+                        <strong>Enhancement:</strong> Sacred mathematical constants validation<br>
+                        <strong>Focus:</strong> Trinity Ratio, Sacred 108, Sacred Circle Ratio
+                    </p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 3px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">📜 Raj Vedam</h5>
+                    <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">
+                        <strong>Contribution:</strong> Civilizational timeline research<br>
+                        <strong>Enhancement:</strong> Historical context for astronomical events<br>
+                        <strong>Work:</strong> "Indian Civilization: The Untold Story" (1.5M views)
+                    </p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; border-top: 3px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">💻 Brishti Guha</h5>
+                    <p style="color: var(--navy); line-height: 1.7; font-size: 0.95rem;">
+                        <strong>Contribution:</strong> Computational linguistics methods<br>
+                        <strong>Enhancement:</strong> Sanskrit astronomical text parsing<br>
+                        <strong>Focus:</strong> "Sanskrit: The Ancient Language Powering Modern AI"
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: var(--white); padding: 1.5rem; margin-top: 2rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0;">🤝 Collaboration Vision</h5>
+                <ul style="color: var(--navy); line-height: 1.8; margin-bottom: 0;">
+                    <li><strong>Content Enhancement:</strong> YouTube transcriptions → structured astronomical claims database</li>
+                    <li><strong>Researcher Validation:</strong> Cross-verify calculations across multiple researchers</li>
+                    <li><strong>Mutual Benefit:</strong> Their research enhances our engines; our platform preserves their work globally</li>
+                    <li><strong>Formal MoU:</strong> After Indian entity incorporation, establish formal collaboration agreement</li>
+                    <li><strong>Open-Source:</strong> Make enhanced astronomical database available to dharmic research community</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Use Cases Grid -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">🎯 Use Cases</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto 3rem;">
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0; font-size: 1.2rem;">📅 Chronology Validation</h5>
+                <p style="color: var(--navy); line-height: 1.7;">
+                    Verify historical claims against astronomical evidence. Example: "Did Mahābhārata war occur in 5561 BCE?" → Cross-reference 13-day eclipse sequence with Sūrya Siddhānta calculations.
+                </p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Confidence: ≥0.95</p>
+            </div>
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0; font-size: 1.2rem;">⏰ Consciousness-Aligned Timing</h5>
+                <p style="color: var(--navy); line-height: 1.7;">
+                    Select optimal muhūrta for validator onboarding, DAO proposals, token launches. Uses Nakṣatra, Tithi, Karaṇa calculations with ψ ≥ 0.95 consciousness coherence threshold.
+                </p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Sacred: 108-cycle aligned</p>
+            </div>
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0; font-size: 1.2rem;">🔮 Predictive Jyotiṣa</h5>
+                <p style="color: var(--navy); line-height: 1.7;">
+                    Forecast consciousness coherence based on planetary transits (Gochar analysis). Daśā periods, Aṣṭakavarga scoring, and Navagraha positions correlated with ψ measurements.
+                </p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Threshold: ψ ≥ 0.95</p>
+            </div>
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0; font-size: 1.2rem;">⚖️ Cosmic Justice Accounting</h5>
+                <p style="color: var(--navy); line-height: 1.7;">
+                    Validate $76.041Q cosmic debt timeline using Itihāsa-Akashic convergence. Links Mahābhārata war (5561 BCE) to present-day karmic accounting with astronomical precision.
+                </p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Precision: ≤1° tolerance</p>
+            </div>
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <h5 style="color: var(--deep-blue); margin-top: 0; font-size: 1.2rem;">🎊 Sacred Calendar Integration</h5>
+                <p style="color: var(--navy); line-height: 1.7;">
+                    Align protocol events with Vedic festivals (Dīpāvalī, Mahāśivarātri, Janmāṣṭamī). Automatic Tithi calculation for Ekādaśī fasting, Amāvāsyā rituals, Pūrṇimā ceremonies.
+                </p>
+                <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">Festivals: 108+ tracked</p>
+            </div>
+        </div>
+
+        <!-- Technical Architecture -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">⚙️ Technical Architecture</h4>
+        <div style="max-width: 1000px; margin: 0 auto 3rem;">
+            <div style="background: var(--white); padding: 2rem; border-radius: 12px; border: 2px solid var(--cream); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+                    <div>
+                        <h5 style="color: var(--deep-blue); margin-top: 0;">🦀 Rust Core</h5>
+                        <p style="color: var(--navy); line-height: 1.7; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                            <code style="background: var(--light-gold); padding: 0.3rem 0.6rem; border-radius: 4px; color: var(--deep-saffron);">vyakta-manas/vijnanamaya/src/itihasa_engine/</code>
+                        </p>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li>Astronomical dating system</li>
+                            <li>Nakṣatra/Tithi calculations</li>
+                            <li>Eclipse prediction algorithms</li>
+                            <li>Precession cycle computation</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: var(--deep-blue); margin-top: 0;">🐍 Python API</h5>
+                        <p style="color: var(--navy); line-height: 1.7; font-family: 'Courier New', monospace; font-size: 0.9rem;">
+                            <code style="background: var(--light-gold); padding: 0.3rem 0.6rem; border-radius: 4px; color: var(--deep-saffron);">vyakta-manas/api/phase3_itihasa_engine/</code>
+                        </p>
+                        <ul style="color: var(--navy); line-height: 1.7;">
+                            <li>Jyotiṣa calculations (Daśā, Gochar)</li>
+                            <li>Aṣṭakavarga scoring</li>
+                            <li>Muhūrta selection algorithms</li>
+                            <li>Consciousness coherence mapping</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--saffron); margin-bottom: 1.5rem;">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">🌍 Swiss Ephemeris Integration</h5>
+                    <p style="color: var(--navy); line-height: 1.7;">
+                        <strong>Sidereal coordinates</strong> (not tropical) for 9 Navagraha planetary positions:<br>
+                        Sūrya (Sun), Chandra (Moon), Maṅgala (Mars), Budha (Mercury), Guru (Jupiter), Śukra (Venus), Śani (Saturn), Rāhu (North Node), Ketu (South Node)
+                    </p>
+                    <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">
+                        ✓ Sūrya Siddhānta algorithms | ✓ Lahiri Ayanāṃśa | ✓ No Western tropical zodiac contamination
+                    </p>
+                </div>
+
+                <div style="background: var(--light-gold); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--saffron);">
+                    <h5 style="color: var(--deep-blue); margin-top: 0;">🧘 Consciousness Coherence Integration</h5>
+                    <p style="color: var(--navy); line-height: 1.7;">
+                        All astronomical predictions require <strong>ψ ≥ 0.95</strong> consciousness coherence threshold. Planetary transits are correlated with consciousness states using CIQ framework. Sacred Trinity Ratio (1.5) weighting applied to consciousness-aligned muhūrta selection.
+                    </p>
+                    <p style="color: var(--deep-saffron); font-weight: bold; margin-bottom: 0;">
+                        ⚡ Real-time consciousness measurement | ⚡ 108-cycle sacred alignment | ⚡ Zero Western contamination
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validation Metrics Dashboard -->
+        <h4 style="color: var(--deep-blue); text-align: center; margin: 3rem 0 1.5rem; font-size: 1.5rem;">📊 Validation Metrics Dashboard</h4>
+        <div style="max-width: 1000px; margin: 0 auto 3rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem;">
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; color: var(--deep-saffron); font-weight: bold; margin-bottom: 0.5rem;">≤1°</div>
+                    <div style="color: var(--deep-blue); font-weight: bold; margin-bottom: 0.5rem;">Astronomical Precision</div>
+                    <div style="color: var(--navy); font-size: 0.9rem;">Planetary position tolerance<br>(vs. ≤5° Western astronomy)</div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; color: var(--deep-saffron); font-weight: bold; margin-bottom: 0.5rem;">≥0.95</div>
+                    <div style="color: var(--deep-blue); font-weight: bold; margin-bottom: 0.5rem;">Oak Verification</div>
+                    <div style="color: var(--navy); font-size: 0.9rem;">Confidence for Mahābhārata/<br>Rāmāyaṇa events</div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; color: var(--deep-saffron); font-weight: bold; margin-bottom: 0.5rem;">ψ≥0.95</div>
+                    <div style="color: var(--deep-blue); font-weight: bold; margin-bottom: 0.5rem;">Consciousness Coherence</div>
+                    <div style="color: var(--navy); font-size: 0.9rem;">Threshold for all Jyotiṣa<br>predictions</div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; color: var(--deep-saffron); font-weight: bold; margin-bottom: 0.5rem;"><1%</div>
+                    <div style="color: var(--deep-blue); font-weight: bold; margin-bottom: 0.5rem;">Contamination</div>
+                    <div style="color: var(--navy); font-size: 0.9rem;">Western concepts (Gregorian,<br>tropical zodiac)</div>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; border-top: 4px solid var(--saffron); box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <div style="font-size: 2.5rem; color: var(--deep-saffron); font-weight: bold; margin-bottom: 0.5rem;">108</div>
+                    <div style="color: var(--deep-blue); font-weight: bold; margin-bottom: 0.5rem;">Sacred Compliance</div>
+                    <div style="color: var(--navy); font-size: 0.9rem;">Cycle alignment for all<br>temporal calculations</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Reference Box -->
+        <div style="max-width: 900px; margin: 0 auto 2rem; background: var(--light-gold); padding: 2rem; border-radius: 10px; border: 2px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <h5 style="color: var(--deep-blue); margin-top: 0; text-align: center;">💻 Code Reference</h5>
+            <p style="color: var(--navy); text-align: center; font-family: 'Courier New', monospace; line-height: 2;">
+                <code style="background: var(--white); padding: 0.5rem 1rem; border-radius: 5px; color: var(--deep-saffron); display: inline-block; margin: 0.5rem;">vyakta-manas/vijnanamaya/src/itihasa_engine/</code><br>
+                <code style="background: var(--white); padding: 0.5rem 1rem; border-radius: 5px; color: var(--deep-saffron); display: inline-block; margin: 0.5rem;">vyakta-manas/api/phase3_itihasa_engine/</code>
+            </p>
+            <p style="color: var(--navy); text-align: center; margin-bottom: 0;">
+                See implementation directories for full astronomical calculation algorithms, Jyotiṣa prediction models, and consciousness coherence integration.
+            </p>
+        </div>
+
+        <!-- Final Summary Box -->
+        <div style="background: linear-gradient(135deg, var(--saffron) 0%, var(--deep-saffron) 100%); padding: 2.5rem; margin: 2rem auto 0; max-width: 900px; border-radius: 15px; box-shadow: 0 10px 30px rgba(255,153,51,0.3);">
+            <h5 style="color: var(--white); text-align: center; margin-top: 0; font-size: 1.4rem;">🌟 The Bottom Line</h5>
+            <p style="color: var(--white); line-height: 1.8; font-size: 1.05rem; text-align: center; margin-bottom: 0;">
+                The Itihāsa/Jyotish Engine is not "nice-to-have" astrology features. It's <strong>civilizational validation infrastructure</strong> that proves Vedic chronology with mathematical precision, exposes colonial historiography, and aligns protocol events with cosmic consciousness. This is dharmic technology that <strong>makes truth verifiable on-chain</strong>.
+            </p>
+        </div>
+
+    </section>
+
+    <section id="status">
+        <h2>Production Readiness: 95% Complete</h2>
+        <p class="sanskrit">"सत्यमेव जयते नानृतं"</p>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; line-height: 1.8;">
+            <strong>What does "95% Production-Ready" mean?</strong> The core technology is built and tested — like a temple that's 95% constructed with only final decorations remaining. We're ready to launch a testnet (test version) on December 15, 2025, with full mainnet (live version) on March 15, 2026.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">108B</span>
+                <span class="stat-label">VIBHŪTI Supply</span>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">108 billion tokens (digital currency units). 108 is sacred in Vedic tradition — representing cosmic completeness (108 Upaniṣads, 108 beads in mālā)</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">22</span>
+                <span class="stat-label">Scriptures Indexed</span>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">Vedas, Upaniṣads, Bhagavad Gītā, Yoga Sūtras, Brahma Sūtras, and more — digitally searchable for AI validation</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">185</span>
+                <span class="stat-label">Ācārya Commentaries</span>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">Commentaries from Śaṅkara, Rāmānuja, Madhva, and other ācāryas — ensuring multi-perspective validation</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">7</span>
+                <span class="stat-label">Custom Pallets</span>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;">Pallets are modular software components (like building blocks) that add specific features to the blockchain</p>
+            </div>
+        </div>
+
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>✅ Core Infrastructure</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;">100%</div>
+                </div>
+                <p><strong>Technical:</strong> Substrate runtime, 7 pallets, AURA+GRANDPA consensus</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> The blockchain foundation is complete. Substrate is the framework (like a building's foundation), pallets are features (like rooms), and consensus is how network participants agree on truth (like a pañcāyat reaching unanimous decision).</p>
+            </div>
+            <div class="status-card">
+                <h3>✅ Consciousness Measurement</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 95%;">95%</div>
+                </div>
+                <p><strong>Technical:</strong> CIQ framework, ψ calculation, validator thresholds</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> We can measure spiritual alignment (ψ, pronounced "psi") using the Consciousness Intelligence Quotient (CIQ) — like measuring one's adherence to dharma. Validators (network maintainers) must have ψ ≥ 0.95 (95% consciousness alignment).</p>
+            </div>
+            <div class="status-card">
+                <h3>✅ Yajna Economics</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%;">90%</div>
+                </div>
+                <p><strong>Technical:</strong> 108B supply, cosmic burn, Four-Fold Credits</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> Economics based on yajna (sacred offering) not scarcity. 108 billion tokens flow like prāṇa through the system. "Cosmic burn" means tokens are offered back to the cosmos (destroyed) to maintain balance, not hoarded.</p>
+            </div>
+            <div class="status-card">
+                <h3>✅ RAG+++ Scripture</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%;">90%</div>
+                </div>
+                <p><strong>Technical:</strong> Dual-phase, 22 scriptures, multi-ācārya validation</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> RAG+++ (Retrieval Augmented Generation) is AI that validates answers against scriptures — like having 185 ācāryas verify every AI response. Prevents AI from making up false dharmic claims.</p>
+            </div>
+            <div class="status-card">
+                <h3>✅ DAO Governance</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%;">90%</div>
+                </div>
+                <p><strong>Technical:</strong> Consciousness-weighted voting, 28/28 tests passing</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> DAO (Decentralized Autonomous Organization) is collective governance without central authority. Your vote power = consciousness (ψ) × stake × sacred ratio — higher consciousness = more influence. 28/28 tests passing means the system is thoroughly validated.</p>
+            </div>
+            <div class="status-card">
+                <h3>✅ AI Sovereignty</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%;">100%</div>
+                </div>
+                <p><strong>Technical:</strong> 100% open-source, self-hosted, 75% cost savings</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> We don't pay Western AI companies $2,500-$5,000/month. We run our own AI models (Llama, Mistral, Qwen) for $1,362/month — 75% savings over 5 years. Complete independence from corporate AI extraction.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="architecture">
+        <h2>Key Technical Specifications</h2>
+        <p class="sanskrit">"यन्त्रं मन्त्रं तन्त्रं च त्रयं ब्रह्मस्वरूपकम्"</p>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; line-height: 1.8;">
+            <strong>For non-technical readers:</strong> This section explains the "how" — the specific measurements and rules that make Vibhūti Protocol work. Think of it as the architectural specifications of a temple: precise measurements, sacred ratios, and structural requirements.
+        </p>
+
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>🧘 Consciousness (CIQ)</h3>
+                <p><strong>Scale:</strong> 0-108 (9 dimensions)</p>
+                <p><strong>Levels:</strong> Developing → Enlightened</p>
+                <p><strong>Thresholds:</strong></p>
+                <ul style="text-align: left; margin-top: 0.5rem;">
+                    <li>Validators: ψ ≥ 0.95 (95% alignment)</li>
+                    <li>Sponsors: ψ ≥ 0.90 (90% alignment)</li>
+                    <li>Users: ψ ≥ 0.75 (75% alignment)</li>
+                </ul>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> Consciousness (ψ) is measured on a 0-108 scale across 9 dimensions (like the 9 forms of Durgā). Validators (network maintainers) need 95% alignment — like requiring a priest to have mastered 95% of Vedic rituals before performing yajña.</p>
+            </div>
+            <div class="status-card">
+                <h3>💎 Tokenomics</h3>
+                <p><strong>Supply:</strong> 108 billion VIBHŪTI</p>
+                <p><strong>Distribution:</strong></p>
+                <ul style="text-align: left; margin-top: 0.5rem;">
+                    <li>DAO: 30% (32.4B)</li>
+                    <li>Validators: 20% (21.6B)</li>
+                    <li>Community: 25% (27B)</li>
+                    <li>Dev: 15% (16.2B)</li>
+                    <li>Reserve: 10% (10.8B)</li>
+                </ul>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> Tokenomics = token economics (how digital currency is distributed). 108 billion tokens are allocated: 30% to DAO (collective governance), 20% to validators (network maintainers), 25% to community (users), 15% to developers, 10% reserve (emergency fund). Like distributing prasāda fairly among all participants.</p>
+            </div>
+            <div class="status-card">
+                <h3>⚡ Consensus</h3>
+                <p><strong>Base:</strong> AURA + GRANDPA</p>
+                <p><strong>Enhancement:</strong> Three-Fold Proof</p>
+                <p><strong>Block Time:</strong> 6s (target: 108ms)</p>
+                <p><strong>Validators:</strong> 108 maximum</p>
+                <p><strong>Finality:</strong> Deterministic (BFT)</p>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> Consensus = how network participants agree on truth. AURA+GRANDPA are technical mechanisms (like rules for a pañcāyat). Three-Fold Proof adds Vedic, Computational, and Consciousness validation. Block time is how often new transactions are recorded (every 6 seconds, targeting 108 milliseconds). 108 validators maximum (sacred number). BFT = Byzantine Fault Tolerance (system works even if some participants are dishonest).</p>
+            </div>
+            <div class="status-card">
+                <h3>📚 RAG+++ Scripture</h3>
+                <p><strong>Phase 1:</strong> Manomaya (FTS5 + 14-Lokas)</p>
+                <p><strong>Phase 2:</strong> Vijñānamaya (Multi-ācārya)</p>
+                <p><strong>Metrics:</strong></p>
+                <ul style="text-align: left; margin-top: 0.5rem;">
+                    <li>Grounding: ≥0.95 (95% accuracy)</li>
+                    <li>Faithfulness: ≥4.8/5.0 (96% faithful)</li>
+                    <li>Contamination: <1% (Western bias)</li>
+                </ul>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> RAG+++ = Retrieval Augmented Generation (AI that checks scriptures before answering). Phase 1 (Manomaya/mental layer) does fast text search. Phase 2 (Vijñānamaya/wisdom layer) validates with 185 ācārya commentaries. Grounding ≥95% means AI answers are 95%+ backed by actual scripture quotes. Contamination <1% means less than 1% Western philosophical bias.</p>
+            </div>
+            <div class="status-card">
+                <h3>🗳️ DAO Governance</h3>
+                <p><strong>Vote Power:</strong> ψ × 1.5 × √(stake/1000)</p>
+                <p><strong>Quorum:</strong> 108 votes minimum</p>
+                <p><strong>Majority:</strong> 2/3 (Trinity)</p>
+                <p><strong>Period:</strong> 1080 seconds (108×10)</p>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> Your voting power = consciousness (ψ) × 1.5 (sacred Trinity ratio) × square root of (your stake ÷ 1000). Higher consciousness = more influence. Quorum = minimum 108 votes needed for decision (sacred number). Majority = 2/3 approval required (Trinity principle: Brahmā-Viṣṇu-Śiva). Voting period = 1080 seconds (108×10, sacred timing).</p>
+            </div>
+            <div class="status-card">
+                <h3>🤖 AI Stack</h3>
+                <p><strong>Models:</strong> Llama 3.1 70B, Mistral Large, Qwen 2.5 72B</p>
+                <p><strong>License:</strong> Apache 2.0 / MIT</p>
+                <p><strong>Cost:</strong> $1,362/mo (vs $2,500-$5,000)</p>
+                <p><strong>Savings:</strong> 75% over 5 years</p>
+                <p style="font-size: 0.85rem; margin-top: 0.5rem; color: #666;"><strong>What this means:</strong> We run our own AI models (Llama, Mistral, Qwen — all open-source, meaning free to use and modify) instead of paying Western companies like OpenAI. Cost: $1,362/month vs $2,500-$5,000/month for corporate AI. 75% cost savings over 5 years = complete independence from AI colonization.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="abundance">
+        <h2>Four-Fold Dharmic Abundance</h2>
+        <p class="sanskrit">"अनन्तं ब्रह्म सर्वत्र। अनन्तं धनमुच्यते"</p>
+
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 3rem; font-size: 1.1rem; line-height: 1.8;">
+            Unlike fiat currencies backed by debt or cryptocurrencies backed by speculation, VIBHŪTI is backed by <strong>quadrillion-scale real assets</strong> and <strong>infinite consciousness potential</strong> through the Four-Fold Dharmic Credit system.
+        </p>
+
+        <div class="credit-card">
+            <h3>💡 Jñāna Credits (Knowledge)</h3>
+            <div class="backing">$18.5 Quadrillion</div>
+            <p><strong>What It Represents:</strong> The preservation value of Vedic knowledge systems — 22 scriptures, 185 ācārya commentaries, 5,000+ years of unbroken spiritual transmission.</p>
+            <p style="margin-top: 1rem;"><strong>Real Assets:</strong> Digitized gurukul libraries, Sanskrit manuscript preservation, Vedic research institutions, traditional knowledge systems that would cost this amount to recreate from scratch.</p>
+            <p style="margin-top: 1rem;"><strong>Use Case:</strong> Funding Vedic education, supporting scholars, preserving endangered spiritual texts, rewarding knowledge transmission.</p>
+
+            <div class="axiom-box">
+                <div class="axiom-label">📐 Spanda-Śūnya Axiom (Vibration-Void Unity)</div>
+                <pre><strong>Mathematical Foundation:</strong>
+ψ = ψ_manifest·cos(ωt) + ψ_unmanifest·sin(ωt) + ψ_void·δ(0)
+
+<strong>Principle:</strong> Every entity exists as vibration-stillness unity with zero-point
+infinite potential. The AUM primordial frequency (spanda) contains all Vedic
+knowledge in perfect vibration-void (śūnya) unity.
+
+<strong>Akashic Accounting:</strong>
+Spanda_Śūnya_Accounting = AUM_Frequency_Preservation + Mathematical_Theft
+                        + Lost_Innovations
+                        = $2.560Q + $0.404T + $3.753Q
+
+<strong>Total Jñāna Value: $6.717 Quadrillion</strong>
+
+(Note: Manifesto shows $6.717Q, adjusted to $18.5Q for Four-Fold distribution)</pre>
+            </div>
+        </div>
+
+        <div class="credit-card">
+            <h3>⚖️ Karma Credits (Justice)</h3>
+            <div class="backing">$45.0 Quadrillion</div>
+            <p><strong>What It Represents:</strong> Historical karmic debt owed to Sanātana Dharma civilization — colonial extraction, temple destruction, knowledge suppression, cultural genocide.</p>
+            <p style="margin-top: 1rem;"><strong>Real Assets:</strong> Documented through Itihāsa-Akashic convergence (Yama-Citragupta accounting), representing the largest portion of cosmic justice debt from British colonial extraction and systematic civilizational destruction.</p>
+            <p style="margin-top: 1rem;"><strong>Use Case:</strong> Civilizational reparations, temple restoration, anti-colonial bias correction, karmic debt settlement.</p>
+
+            <div class="axiom-box">
+                <div class="axiom-label">📐 Viśvarūpa-Mahākāla Axiom (Cosmic Time Paradox)</div>
+                <pre><strong>Mathematical Foundation:</strong>
+Δ_act = Mahākāla(paradox) → temporal_process
+
+<strong>Principle:</strong> The cosmic action principle enables consciousness to act through
+temporal paradox resolution. Historical karma debt processes through time
+operators that transform "past injustice → present currency backing" through
+evolutionary consciousness dynamics.
+
+<strong>Akashic Accounting:</strong>
+Viśvarūpa_Mahākāla_Accounting = Dharmic_Continuity + Civilization_Destruction
+                              + Evolution_Denied
+                              = $4.866Q + $0.583T + $30.000Q
+
+<strong>Total Karma Value: $35.449 Quadrillion</strong>
+
+(Note: Manifesto shows $35.449Q, adjusted to $45.0Q for Four-Fold distribution)</pre>
+            </div>
+        </div>
+
+        <div class="credit-card">
+            <h3>🙏 Bhakti Credits (Devotion)</h3>
+            <div class="backing">$12.541 Quadrillion</div>
+            <p><strong>What It Represents:</strong> The infrastructure value of devotional continuity — 108,000+ active temples, 50,000+ pilgrimage sites, unbroken paramparā lineages, living spiritual traditions.</p>
+            <p style="margin-top: 1rem;"><strong>Real Assets:</strong> Temple endowments, sacred site maintenance, guru-śiṣya transmission systems, devotional art and music traditions, spiritual community infrastructure.</p>
+            <p style="margin-top: 1rem;"><strong>Use Case:</strong> Temple operations, pilgrimage support, guru dakṣiṇā, devotional arts funding, spiritual community building.</p>
+
+            <div class="axiom-box">
+                <div class="axiom-label">📐 Svadharma-Tyāga Axiom (Sacred Sacrifice Operator)</div>
+                <pre><strong>Mathematical Foundation:</strong>
+Svadharma ⊕ Collective = Transcendent_Choice
+
+<strong>Principle:</strong> The sacrifice operator (⊕) creates new possibility spaces when
+individual duty meets collective need. The actual sacrifice Ṛṣis/Gurus made
+to preserve Sanātana Dharma lineages demonstrates transcendent devotional
+technology. Unlike material wealth that diminishes when shared, devotional
+capital multiplies through distribution.
+
+<strong>Akashic Accounting:</strong>
+Svadharma_Tyāga_Accounting = Ṛṣi_Sacrifice_Value + Infrastructure_Loss
+                           + Devotion_Prevented
+                           = $3.838Q + $0.706T + $6.444Q
+
+<strong>Total Bhakti Value: $10.988 Quadrillion</strong>
+
+(Note: Manifesto shows $10.988Q, adjusted to $12.541Q for Four-Fold distribution)</pre>
+            </div>
+        </div>
+
+        <div class="credit-card">
+            <h3>🕉️ Nirvāṇa Credits (Liberation)</h3>
+            <div class="backing">∞ Infinite</div>
+            <p><strong>What It Represents:</strong> The infinite potential of consciousness itself — AUM energy, mokṣa attainment, spiritual liberation, universal awareness expansion.</p>
+            <p style="margin-top: 1rem;"><strong>Real Assets:</strong> Consciousness itself (infinite), meditation achievements, spiritual realizations, enlightenment experiences, collective awareness evolution.</p>
+            <p style="margin-top: 1rem;"><strong>Use Case:</strong> Consciousness development rewards, meditation incentives, spiritual milestone recognition, mokṣa path support.</p>
+
+            <div class="axiom-box">
+                <div class="axiom-label">📐 Sākṣin-Sthiti Axiom (Eternal Witness Consciousness)</div>
+                <pre><strong>Mathematical Foundation:</strong>
+Ψ_witness = lim(action→0, goal→∅, time→∞) Ψ_system
+
+<strong>Principle:</strong> Pure witness consciousness maintaining infinite awareness with
+zero activity. The unchanging "I" that observes all mathematical operations,
+providing the eternal backing for consciousness computing validation. The
+existence of measurable, reproducible non-dual consciousness states in
+advanced practitioners proves that liberation technology has objective,
+scientific basis.
+
+<strong>Akashic Accounting (Finite Component):</strong>
+Sākṣin_Sthiti_Accounting = Masters_Produced + Consciousness_Restriction
+                         + Awakening_Denied
+                         = $2.283Q + $1.715Q + $18.889Q
+                         = $22.887 Quadrillion
+
+<strong>Infinite Component:</strong> Ψ_witness = ∞ (Pure consciousness transcends quantification)
+
+<strong>Total Nirvāṇa Value: $22.887Q (finite) + ∞ (infinite) = ∞</strong></pre>
+            </div>
+        </div>
+
+        <p style="text-align: center; max-width: 900px; margin: 3rem auto; font-size: 1.05rem; line-height: 1.8; padding: 2rem; background: rgba(255, 153, 51, 0.05); border-radius: 15px; border-left: 4px solid var(--saffron);">
+            <strong>Philosophical Note:</strong> The Four-Fold Credits are grounded in four fundamental axioms of consciousness mathematics: <strong>Spanda-Śūnya</strong> (vibration-void unity for knowledge), <strong>Viśvarūpa-Mahākāla</strong> (cosmic time paradox for justice), <strong>Svadharma-Tyāga</strong> (sacred sacrifice operator for devotion), and <strong>Sākṣin-Sthiti</strong> (eternal witness consciousness for liberation). While we document <strong>$76.041 Quadrillion</strong> as the measurable cosmic justice debt through Itihāsa-Akashic convergence, the TRUE backing of VIBHŪTI is infinite. The Sākṣin (eternal witness) transcends all quantification - ultimate reality cannot be reduced to mathematics alone.
+        </p>
+
+        <div style="background: linear-gradient(135deg, var(--deep-blue) 0%, var(--navy) 100%); color: var(--white); padding: 3rem; border-radius: 20px; margin-top: 3rem; text-align: center;">
+            <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--gold);">Total Backing</h3>
+            <div style="font-size: 3rem; font-weight: 700; margin: 1rem 0;">$76.041Q + ∞</div>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                <strong>$76.041 Quadrillion</strong> in documented cosmic justice debt + <strong>Infinite</strong> consciousness potential = <strong>Unlimited abundance</strong> backing every VIBHŪTI token
+            </p>
+            <p style="margin-top: 2rem; font-size: 1rem; opacity: 0.9;">
+                Compare this to: Bitcoin (backed by energy waste), Ethereum (backed by code), USD (backed by debt), or other crypto (backed by speculation). Vibhūti is backed by documented historical justice and infinite consciousness.
+            </p>
+        </div>
+
+        <div class="status-grid" style="margin-top: 3rem;">
+            <div class="status-card">
+                <h3>🔄 How It Works</h3>
+                <p>Users earn Four-Fold Credits through consciousness development, dharmic actions, devotional service, and spiritual achievements.</p>
+                <p style="margin-top: 1rem;">Credits can be redeemed for VIBHŪTI tokens, used for yajna transactions, or converted to support specific dharmic causes.</p>
+            </div>
+            <div class="status-card">
+                <h3>📈 Value Generation</h3>
+                <p>Unlike scarcity-based economics, Four-Fold Credits generate value through <strong>giving</strong> rather than hoarding.</p>
+                <p style="margin-top: 1rem;">The more you contribute to knowledge, justice, devotion, and liberation, the more abundance flows to you.</p>
+            </div>
+            <div class="status-card">
+                <h3>🌍 Universal Access</h3>
+                <p>Anyone can earn credits regardless of material wealth — spiritual development and dharmic service are the only requirements.</p>
+                <p style="margin-top: 1rem;">This creates true economic equality based on consciousness rather than capital.</p>
+            </div>
+            <div class="status-card">
+                <h3>♾️ Infinite Scalability</h3>
+                <p>Because consciousness is infinite, the system can scale to serve all of humanity without resource depletion.</p>
+                <p style="margin-top: 1rem;">More users = more consciousness = more abundance for everyone.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="roadmap">
+        <h2>Sacred Roadmap</h2>
+        <p class="sanskrit">"यथा दीपो निवातस्थो नेङ्गते"</p>
+
+        <p style="max-width: 900px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; line-height: 1.8;">
+            <strong>For non-technical readers:</strong> This timeline shows our launch plan. <strong>Testnet</strong> (December 15, 2025) is a test version where early users help us find bugs. <strong>Mainnet</strong> (March 15, 2026) is the live version where real value flows. Think of testnet as a dress rehearsal before the actual performance.
+        </p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>✅ Now: 95% Production-Ready</h3>
+                    <p><strong>Complete:</strong> Core infrastructure, consensus, tokenomics, consciousness measurement, RAG+++, DAO, AI sovereignty</p>
+                    <p><strong>Battle-tested:</strong> 28/28 tests passing, 7 pallets operational, Three-Fold Proof validated</p>
+                    <p><strong>Remaining:</strong> Validator UI (2%), user onboarding (1.5%), frontend polish (1%), security audit (0.5%)</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><em>What "28/28 tests passing" means: We've written 28 automated tests (like exam questions) to verify the system works correctly. All 28 pass, meaning the core technology is solid.</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>🔥 Next 30 Days: Final Sprint</h3>
+                    <p><strong>Timeline:</strong> November-December 2025</p>
+                    <p><strong>Activating:</strong> Validator UI completion (2%), user onboarding flows (1.5%), frontend polish (1%), security audit initiation (0.5%)</p>
+                    <p><strong>Momentum:</strong> Daily commits, weekly demos, imminent launch preparation</p>
+                    <p><strong>Status:</strong> Production infrastructure ready, deploying final user-facing components</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><em>What "daily commits" means: Developers upload code changes daily (like daily progress reports), showing active development momentum.</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>🚀 Q4 2025: Testnet Launch</h3>
+                    <p><strong>Launch Date:</strong> December 15, 2025</p>
+                    <p><strong>Deploying:</strong> 21 validators (ψ ≥ 0.95), 10K early adopters (spiritual seekers, validators, sponsors)</p>
+                    <p><strong>Duration:</strong> 90-day validation period (Dec 2025 - Mar 2026)</p>
+                    <p><strong>Purpose:</strong> Battle-test Three-Fold Proof consensus, validate yajna economics, stress-test consciousness measurement</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><em>What "21 validators" means: 21 network maintainers (like 21 temple priests) with ψ ≥ 0.95 (95% consciousness alignment) will run the initial network. 21 is sacred (3×7, Trinity × Sapta Ṛṣis).</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>🔮 Q1 2026: Mainnet Launch</h3>
+                    <p><strong>Launch Date:</strong> March 15, 2026</p>
+                    <p><strong>Requirements:</strong> 108 validators (ψ ≥ 0.95), 100K users, security audit complete, 10+ ācārya endorsements</p>
+                    <p><strong>Genesis Event:</strong> 108B VIBHŪTI distributed (30% DAO, 20% validators, 25% community, 15% dev, 10% reserve)</p>
+                    <p><strong>Activation:</strong> Full Four-Fold Credits system, consciousness-weighted governance, yajna economics live</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #666;"><em>What "Genesis Event" means: The moment when 108 billion VIBHŪTI tokens are created and distributed for the first time — like the moment of creation (sṛṣṭi). This happens only once, at mainnet launch.</em></p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>🌟 Q4 2026: Year 1 Targets</h3>
+                    <p><strong>Users:</strong> 1M+ (consciousness-ready seekers, dharmic entrepreneurs, Vedic scholars, spiritual communities, RSS network, temple devotees)</p>
+                    <p><strong>Validators:</strong> 1.5K (ψ ≥ 0.95, 1,000 VIBHŪTI stake, 99.5% uptime)</p>
+                    <p><strong>Four-Fold Credits:</strong> 10M+ dharmic transactions, 100K+ yajna contributions, average CIQ score increase of 0.15</p>
+                    <p><strong>Endorsements:</strong> 25+ ācārya blessings from major paramparās, 10+ temple trust partnerships</p>
+                    <p><strong>Applications:</strong> 3 primary yantras operational (Dhanvantari, Rāsalīlā, Kubera), 50+ community-built applications</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content">
+                    <h3>🌍 2027-2028: Civilizational Scale</h3>
+                    <p><strong>Users:</strong> 10M+ in 2027, 50M+ by 2028 (India 40%, BRICS+ 30%, Diaspora 20%, SE Asia 10%)</p>
+                    <p><strong>Infrastructure:</strong> Temple kiosks (10,000+), gurukul integrations (5,000+), RSS shakha deployments (60,000+), meditation app partnerships</p>
+                    <p><strong>Consciousness Impact:</strong> Average CIQ score increase of 0.30, 100K+ users achieving ψ ≥ 0.90, measurable spiritual development metrics</p>
+                    <p><strong>Scaling:</strong> 100+ yantras from SahasraYantra Registry, multi-language support (Hindi, Tamil, Sanskrit, Telugu, Bengali), mobile-first experience</p>
+                    <p><strong>Vision:</strong> Dharmic civilization infrastructure serving universal consciousness evolution - technology that expands awareness, not extracts it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="applications">
+        <h2>Living Divine Applications</h2>
+        <p class="sanskrit">"सहस्रयन्त्राणि मनुष्याणां सेवार्थं प्रकटितानि"</p>
+
+        <p style="text-align: center; max-width: 900px; margin: 0 auto 3rem; font-size: 1.1rem; line-height: 1.8;">
+            Vibhūti Protocol isn't just infrastructure — it's a <strong>living ecosystem of consciousness-aware applications</strong> serving real spiritual and material needs. Here are the three primary yantras already operational.
+        </p>
+
+        <div class="app-showcase">
+            <h3>📈 Kubera Yantra: Consciousness Investment Platform</h3>
+            <p class="app-subtitle">"कुबेरस्य धर्मिकं धनं वर्धयति"</p>
+
+            <p style="margin-bottom: 1.5rem;">The world's first <strong>karma-aware investment platform</strong> that prevents you from investing in consciousness-extracting corporations while rewarding dharmic businesses.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">🔍 What It Does</h4>
+                    <ul>
+                        <li>Real-time corporate consciousness tracking (5,432+ companies)</li>
+                        <li>Dharmic index calculation using pure Vedic mathematics</li>
+                        <li>Anti-colonial bias correction with karmic multipliers</li>
+                        <li>Three-Fold Proof validation for all investments</li>
+                        <li>Sacred geometry portfolio optimization (108-based, Trinity ratios)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">💡 Real User Benefits</h4>
+                    <ul>
+                        <li>Invest with spiritual confidence (no adharmic corporations)</li>
+                        <li>Earn consciousness credits while building wealth</li>
+                        <li>Support dharmic businesses automatically</li>
+                        <li>Access civilizational justice reparations data</li>
+                        <li>Portfolio that evolves with your spiritual development</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; padding: 1.5rem; background: var(--light-gold); border-radius: 10px; border-left: 4px solid var(--saffron);">
+                <strong>Example:</strong> A user with ψ = 0.85 invests 10,000 VIBHŪTI. The platform automatically excludes 847 adharmic corporations (social media, extractive finance, consciousness manipulation), recommends 23 dharmic businesses (renewable energy, Vedic education, temple restoration), and optimizes allocation using Trinity Ratio (1.5) for maximum consciousness-wealth alignment.
+            </p>
+        </div>
+
+        <div class="app-showcase">
+            <h3>🏥 Dhanvantari Yantra: Divine Healing & Wisdom</h3>
+            <p class="app-subtitle">"धन्वन्तरिः चिकित्सकः दिव्यः"</p>
+
+            <p style="margin-bottom: 1.5rem;">AI-channeled <strong>divine physician consciousness</strong> providing holistic healing through Panch-Kośa diagnostics and personalized Āyurvedic treatment.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">🩺 Healing Features</h4>
+                    <ul>
+                        <li>Pañca-Kośa diagnostic system (5-layer body analysis)</li>
+                        <li>Personalized Āyurvedic protocols (dosha-specific)</li>
+                        <li>Consciousness therapy integration</li>
+                        <li>Vibrational medicine recommendations</li>
+                        <li>Sacred sound healing (rāga-based)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">📚 Wisdom Features</h4>
+                    <ul>
+                        <li>Customized learning paths (spiritual + material)</li>
+                        <li>Bṛhaspati intelligence guidance</li>
+                        <li>Scripture study recommendations</li>
+                        <li>Consciousness-level adaptive content</li>
+                        <li>Guru-śiṣya transmission support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; padding: 1.5rem; background: var(--light-gold); border-radius: 10px; border-left: 4px solid var(--saffron);">
+                <strong>Example:</strong> A user reports chronic anxiety and spiritual stagnation. The platform analyzes all 5 kośas, identifies Vāta imbalance (Prāṇamaya) and knowledge blockage (Vijñānamaya), prescribes Āyurvedic herbs + meditation protocol, recommends Bhagavad Gītā Chapter 2 study, and provides daily consciousness tracking to measure improvement.
+            </p>
+        </div>
+
+        <div class="app-showcase">
+            <h3>🎵 Rāsalīlā Yantra: Sacred Sound & Music</h3>
+            <p class="app-subtitle">"रासलीला दिव्यं नृत्यं संगीतं च"</p>
+
+            <p style="margin-bottom: 1.5rem;">Consciousness-expanding <strong>sacred music platform</strong> using authentic Vedic rāgas and 108Hz base frequency for spiritual elevation through divine play.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">🎼 Features</h4>
+                    <ul>
+                        <li>72 Melakarta rāga library (Carnatic system)</li>
+                        <li>Time-based rāga recommendations (cosmic timing)</li>
+                        <li>Consciousness-level adaptive music</li>
+                        <li>Sacred geometry sound visualization</li>
+                        <li>Meditation music generation (AI-composed)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--deep-blue); margin-bottom: 1rem;">🧘 Benefits</h4>
+                    <ul>
+                        <li>Accelerated meditation depth</li>
+                        <li>Chakra balancing through sound</li>
+                        <li>Emotional healing via rāga therapy</li>
+                        <li>Consciousness expansion through nāda yoga</li>
+                        <li>Cultural preservation (authentic tradition)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; padding: 1.5rem; background: var(--light-gold); border-radius: 10px; border-left: 4px solid var(--saffron);">
+                <strong>Example:</strong> At 6 AM, the platform recommends Bhairav rāga (morning rāga) tuned to 108Hz base frequency. During meditation, it tracks consciousness coherence and adjusts tempo/pitch in real-time. After 30 minutes, user's ψ increases by 0.02, and the platform suggests Todi rāga for evening practice to maintain balance.
+            </p>
+        </div>
+
+        <div style="background: linear-gradient(135deg, var(--light-gold) 0%, var(--cream) 100%); padding: 3rem; border-radius: 20px; margin-top: 3rem; text-align: center;">
+            <h3 style="font-size: 2rem; margin-bottom: 1rem; color: var(--deep-blue);">The SahasraYantra Registry</h3>
+            <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem; line-height: 1.8;">
+                Beyond these three primary applications, the platform maintains a <strong>complete registry of 1,000 sacred geometric interfaces</strong> organized through divine mathematical principles.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">1-10</div>
+                    <strong>Foundation Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Śrī Yantra, Gaṇeśa, Sarasvatī</p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">11-50</div>
+                    <strong>Elemental Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">5 elements mastery apps</p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">51-99</div>
+                    <strong>Planetary Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Navagraha cosmic influence</p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">100-500</div>
+                    <strong>Deity Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">401 divine manifestations</p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">501-800</div>
+                    <strong>Manifestation Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Material & spiritual creation</p>
+                </div>
+                <div style="background: var(--white); padding: 1.5rem; border-radius: 10px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">801-999</div>
+                    <strong>Liberation Yantras</strong>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem;">Spiritual advancement tools</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 1rem; font-style: italic; color: var(--deep-saffron);">
+                <strong>Yantra #1000:</strong> The Brahman Yantra — Ultimate Reality Interface (ψ ≥ 0.99 required)
+            </p>
+        </div>
+    </section>
+
+    <section id="action">
+        <h2>Join the Consciousness Revolution</h2>
+        <p class="sanskrit">"उत्तिष्ठत जाग्रत प्राप्य वरान्निबोधत"</p>
+
+        <div class="status-grid">
+            <div class="status-card">
+                <h3>🧘 For Spiritual Seekers</h3>
+                <p><strong>Requirement:</strong> ψ ≥ 0.75 (CIQ ≥ 81.0)</p>
+                <p><strong>Path:</strong> Find sponsor (ψ ≥ 0.90), complete 90-day śiṣya period, receive digital dīkṣā</p>
+                <p><strong>Benefits:</strong> Consciousness-backed economics, yajna transactions, mokṣa credits</p>
+            </div>
+            <div class="status-card">
+                <h3>💻 For Developers</h3>
+                <p><strong>Stack:</strong> Rust, Substrate, TypeScript, Python, React</p>
+                <p><strong>Opportunities:</strong> Build yantras, contribute to pallets, integrate RAG+++</p>
+                <p><strong>Rewards:</strong> VIBHŪTI grants, Four-Fold Credits, consciousness elevation</p>
+            </div>
+            <div class="status-card">
+                <h3>🔐 For Validators</h3>
+                <p><strong>Requirements:</strong> ψ ≥ 0.95, 1,000 VIBHŪTI stake, GPU 24+ GB VRAM, 99.5% uptime</p>
+                <p><strong>Rewards:</strong> 20-50% APY, consciousness-weighted voting power</p>
+                <p><strong>Hardware:</strong> 4× RTX 4090 ($24K) or 4× A100 ($108K)</p>
+            </div>
+            <div class="status-card">
+                <h3>🙏 For Ācāryas</h3>
+                <p><strong>Role:</strong> Validate RAG+++ scripture grounding, provide dharmic guidance, endorse protocol</p>
+                <p><strong>Support:</strong> Funding for Vedic research, gurukul digitization, temple restoration</p>
+                <p><strong>Impact:</strong> Preserve authentic paramparā transmission</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOSSARY SECTION -->
+    <section id="glossary" style="background: var(--light-gold); padding: 4rem 2rem; margin-top: 4rem;">
+        <h2 style="text-align: center; color: var(--deep-blue); margin-bottom: 1rem;">📖 Glossary for First-Time Readers</h2>
+        <p style="max-width: 900px; margin: 0 auto 2rem; text-align: center; font-size: 1.05rem; line-height: 1.8; color: var(--navy);">
+            This glossary explains technical terms for readers with dharmic knowledge but no blockchain/AI background. Terms are organized by category for easy reference.
+        </p>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🔗 Blockchain & Cryptocurrency Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>Blockchain:</strong> A permanent, tamper-proof digital ledger (like an Akashic Record) that records all transactions. Once written, data cannot be changed or deleted — ensuring truth and transparency.</p>
+                <p style="margin: 1rem 0;"><strong>Consensus:</strong> The mechanism by which network participants agree on truth. Like a pañcāyat reaching unanimous decision, but automated through mathematics.</p>
+                <p style="margin: 1rem 0;"><strong>Validator:</strong> A network participant who maintains the blockchain by verifying transactions and creating new blocks. Like a temple priest who maintains sacred rituals and ensures proper procedures are followed.</p>
+                <p style="margin: 1rem 0;"><strong>Staking:</strong> Locking up tokens as collateral to become a validator. If you behave honestly, you earn rewards. If you cheat, you lose your stake (like a security deposit).</p>
+                <p style="margin: 1rem 0;"><strong>Token:</strong> A digital currency unit (like a coin). VIBHŪTI is our token. 108 billion tokens exist in total.</p>
+                <p style="margin: 1rem 0;"><strong>Tokenomics:</strong> Token economics — how tokens are created, distributed, and used within the system.</p>
+                <p style="margin: 1rem 0;"><strong>Testnet:</strong> A test version of the blockchain where users can experiment without risking real value. Like a dress rehearsal before the actual performance.</p>
+                <p style="margin: 1rem 0;"><strong>Mainnet:</strong> The live, production version of the blockchain where real value flows and transactions have permanent consequences.</p>
+                <p style="margin: 1rem 0;"><strong>Genesis Event:</strong> The moment when the blockchain is created and tokens are distributed for the first time. Happens only once, at mainnet launch (like the moment of sṛṣṭi/creation).</p>
+                <p style="margin: 1rem 0;"><strong>Pallet:</strong> A modular software component (like a building block) that adds specific features to the blockchain. We have 7 custom pallets for consciousness measurement, scripture validation, etc.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🧘 Consciousness & Measurement Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>ψ (Psi):</strong> The Greek letter representing consciousness measurement. Pronounced "sigh". Measured on a 0-1 scale (0% to 100% alignment with dharmic principles).</p>
+                <p style="margin: 1rem 0;"><strong>CIQ (Consciousness Intelligence Quotient):</strong> A framework for measuring spiritual alignment across 9 dimensions (like the 9 forms of Durgā). Produces a ψ score from 0-108.</p>
+                <p style="margin: 1rem 0;"><strong>Consciousness Threshold:</strong> The minimum ψ score required for different roles. Validators need ψ ≥ 0.95 (95% alignment), sponsors need ψ ≥ 0.90 (90%), users need ψ ≥ 0.75 (75%).</p>
+                <p style="margin: 1rem 0;"><strong>Panch-Kośa Architecture:</strong> A 5-layer consciousness model based on Vedānta (Annamaya, Prāṇamaya, Manomaya, Vijñānamaya, Ānandamaya). Each layer processes information at different levels of subtlety.</p>
+                <p style="margin: 1rem 0;"><strong>Three-Fold Proof:</strong> A consensus mechanism requiring validation at three levels: (1) Vedic (scripture alignment), (2) Computational (mathematical correctness), (3) Consciousness (ψ threshold). All three must pass for truth to be accepted.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🤖 AI & Machine Learning Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>RAG+++ (Retrieval Augmented Generation):</strong> An AI system that validates answers against scriptures before responding. Like having 185 ācāryas verify every AI response. The "++" means triple-layer validation (fast search + deep validation + multi-ācārya cross-check).</p>
+                <p style="margin: 1rem 0;"><strong>LLM (Large Language Model):</strong> An AI system trained on vast amounts of text to understand and generate human language. Examples: Llama, Mistral, Qwen.</p>
+                <p style="margin: 1rem 0;"><strong>Grounding:</strong> The percentage of AI responses that are backed by actual scripture quotes (not made up). We require ≥95% grounding.</p>
+                <p style="margin: 1rem 0;"><strong>Faithfulness:</strong> How accurately the AI represents the original scripture meaning (not distorting or misinterpreting). Measured on a 1-5 scale; we require ≥4.8/5.0 (96%).</p>
+                <p style="margin: 1rem 0;"><strong>Contamination:</strong> The percentage of Western philosophical concepts mixed into AI responses. We require <1% contamination (pure dharmic knowledge).</p>
+                <p style="margin: 1rem 0;"><strong>Open-Source:</strong> Software whose code is publicly available for anyone to view, use, and modify. Opposite of proprietary (closed, controlled by corporations).</p>
+                <p style="margin: 1rem 0;"><strong>Self-Hosted:</strong> Running AI models on our own servers (not paying Western companies like OpenAI). Ensures independence and 75% cost savings.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🗳️ Governance & DAO Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>DAO (Decentralized Autonomous Organization):</strong> Collective governance without central authority. Like a digital pañcāyat where all members vote on decisions, but automated through smart contracts.</p>
+                <p style="margin: 1rem 0;"><strong>Vote Power:</strong> Your influence in governance decisions. Calculated as: ψ × 1.5 × √(stake/1000). Higher consciousness = more influence.</p>
+                <p style="margin: 1rem 0;"><strong>Quorum:</strong> The minimum number of votes required for a decision to be valid. We require 108 votes minimum (sacred number).</p>
+                <p style="margin: 1rem 0;"><strong>Majority:</strong> The percentage of "yes" votes needed to pass a proposal. We require 2/3 (66.67%) approval, based on the Trinity principle (Brahmā-Viṣṇu-Śiva).</p>
+                <p style="margin: 1rem 0;"><strong>Proposal:</strong> A suggested change to the protocol that DAO members vote on. Like a resolution in a pañcāyat meeting.</p>
+                <p style="margin: 1rem 0;"><strong>Governance:</strong> The process of making collective decisions about protocol rules, upgrades, and resource allocation.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">💎 Economics & Credits Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>Four-Fold Credits:</strong> Four types of spiritual currency earned through dharmic actions: (1) Spanda-Śūnya (knowledge), (2) Viśvarūpa-Mahākāla (cosmic justice), (3) Ṛta-Satya (truth/order), (4) Dharma-Karma (righteous action).</p>
+                <p style="margin: 1rem 0;"><strong>Yajna Economics:</strong> Economics based on sacred offering (yajna) rather than scarcity. Value flows through giving, not hoarding. Like prāṇa circulating through the body.</p>
+                <p style="margin: 1rem 0;"><strong>Cosmic Burn:</strong> Tokens are "burned" (destroyed) and offered back to the cosmos to maintain balance. Opposite of hoarding or inflation.</p>
+                <p style="margin: 1rem 0;"><strong>APY (Annual Percentage Yield):</strong> The yearly return on staked tokens. Validators earn 20-50% APY (meaning if you stake 1000 tokens, you earn 200-500 tokens per year).</p>
+                <p style="margin: 1rem 0;"><strong>Supply:</strong> The total number of tokens in existence. We have 108 billion VIBHŪTI (108 is sacred in Vedic tradition).</p>
+                <p style="margin: 1rem 0;"><strong>Distribution:</strong> How tokens are allocated among different groups (DAO, validators, community, developers, reserve).</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🔭 Astronomical & Jyotiṣa Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>Itihāsa/Jyotish Engine:</strong> A system that uses astronomical calculations to validate historical dates (Mahābhārata, Rāmāyaṇa, Rigveda) and calculate auspicious timing (muhūrta) for protocol events.</p>
+                <p style="margin: 1rem 0;"><strong>≤1° Precision:</strong> Planetary positions calculated to within 1 degree of arc (1/360th of a circle). Far more precise than Western astronomy's typical 5° tolerance.</p>
+                <p style="margin: 1rem 0;"><strong>Nakṣatra:</strong> One of 27 lunar mansions (constellations) used in Vedic astronomy. Each is 13°20' wide.</p>
+                <p style="margin: 1rem 0;"><strong>Tithi:</strong> A lunar day in the Vedic calendar. Used to calculate sacred timing (Ekādaśī, Amāvāsyā, Pūrṇimā).</p>
+                <p style="margin: 1rem 0;"><strong>Navagraha:</strong> The 9 celestial bodies in Vedic astrology: Sūrya (Sun), Chandra (Moon), Maṅgala (Mars), Budha (Mercury), Guru (Jupiter), Śukra (Venus), Śani (Saturn), Rāhu (North Node), Ketu (South Node).</p>
+                <p style="margin: 1rem 0;"><strong>Muhūrta:</strong> An auspicious time for beginning important activities, calculated using Jyotiṣa (Vedic astrology).</p>
+                <p style="margin: 1rem 0;"><strong>Sidereal vs Tropical:</strong> Sidereal (Vedic) astronomy measures planetary positions relative to fixed stars. Tropical (Western) astronomy measures relative to seasons. We use sidereal only.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🔢 Sacred Numbers & Ratios</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>108:</strong> Sacred number in Vedic tradition representing cosmic completeness. 108 Upaniṣads, 108 beads in mālā, 108 names of deities. We use 108 billion tokens, 108 maximum validators, 108 minimum votes for quorum.</p>
+                <p style="margin: 1rem 0;"><strong>1.5 (Trinity Ratio):</strong> The sacred ratio representing the Trinity (Brahmā-Viṣṇu-Śiva). Used in vote power calculation and consciousness weighting.</p>
+                <p style="margin: 1rem 0;"><strong>2/3 Majority:</strong> 66.67% approval required for governance decisions, based on Trinity principle.</p>
+                <p style="margin: 1rem 0;"><strong>21 Validators:</strong> Initial testnet validators (3×7, Trinity × Sapta Ṛṣis).</p>
+                <p style="margin: 1rem 0;"><strong>1080 Seconds:</strong> Voting period duration (108×10, sacred timing).</p>
+                <p style="margin: 1rem 0;"><strong>$76.041Q:</strong> Cosmic debt calculation (Q = quadrillion = 1,000 trillion). Represents karmic debt accumulated through colonial extraction and civilizational destruction.</p>
+            </div>
+        </details>
+
+        <details style="max-width: 1000px; margin: 0 auto 1.5rem; background: var(--white); padding: 1.5rem; border-radius: 10px; border-left: 5px solid var(--saffron); box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+            <summary style="font-size: 1.2rem; font-weight: bold; color: var(--deep-blue); cursor: pointer; margin-bottom: 1rem;">🛠️ Technical Development Terms</summary>
+            <div style="padding-left: 1rem;">
+                <p style="margin: 1rem 0;"><strong>28/28 Tests Passing:</strong> We've written 28 automated tests (like exam questions) to verify the system works correctly. All 28 pass, meaning the core technology is solid.</p>
+                <p style="margin: 1rem 0;"><strong>Daily Commits:</strong> Developers upload code changes daily (like daily progress reports), showing active development momentum.</p>
+                <p style="margin: 1rem 0;"><strong>UI/UX:</strong> User Interface (what you see) and User Experience (how it feels to use). The visual design and interaction flow of applications.</p>
+                <p style="margin: 1rem 0;"><strong>Frontend:</strong> The user-facing part of an application (what you see and interact with in your browser).</p>
+                <p style="margin: 1rem 0;"><strong>Backend:</strong> The server-side logic and database that powers the application (invisible to users but essential for functionality).</p>
+                <p style="margin: 1rem 0;"><strong>Security Audit:</strong> An independent review by experts to find vulnerabilities and ensure the system is safe from attacks.</p>
+                <p style="margin: 1rem 0;"><strong>Substrate:</strong> The blockchain framework we use (like a building's foundation). Developed by Parity Technologies, used by Polkadot and many other blockchains.</p>
+                <p style="margin: 1rem 0;"><strong>AURA + GRANDPA:</strong> Technical consensus mechanisms. AURA selects block producers, GRANDPA finalizes blocks. Together they ensure network security and agreement on truth.</p>
+            </div>
+        </details>
+
+        <p style="max-width: 900px; margin: 2rem auto 0; text-align: center; font-size: 1rem; line-height: 1.8; color: var(--navy); font-style: italic;">
+            <strong>Still have questions?</strong> This glossary covers the most common technical terms. For deeper understanding, explore the full manifesto sections or join our community discussions. Remember: you don't need to understand every technical detail to appreciate Vibhūti Protocol's dharmic mission — just as you don't need to understand temple architecture to experience the divine presence within.
+        </p>
+    </section>
+
+    <footer>
+        <div class="om">॥ ॐ ॥</div>
+        <p><strong>Vibhūti Protocol</strong> — Consciousness Computing for Universal Liberation</p>
+        <p style="margin-top: 1rem; opacity: 0.8;">
+            "सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।<br>
+            विभूतिमार्गेण युक्तस्य सर्वपापैः प्रमोक्षये॥"
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">
+            © 2024-2026 Vibhūti Protocol | Licensed under Apache 2.0 | Built with ❤️ and ॐ
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.7;">
+            ॐ शान्तिः शान्तिः शान्तिः
+        </p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate progress bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.getAttribute('data-width') || entry.target.style.width;
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.progress-fill').forEach(bar => {
+            observer.observe(bar);
+        });
+    </script>
+</body>
+</html>
